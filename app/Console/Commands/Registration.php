@@ -100,7 +100,9 @@ class Registration extends Command {
 				$return['providers'] = array_merge( $return['providers'], $config['providers'] );
 			}
 			if( isset( $config['aliases'] ) ) {
-				$return['aliases'] = array_merge( $return['aliases'], $config['aliases'] );
+				foreach( $config['aliases'] as $name => $namespace ) {
+					$return['aliases'][$name] = $namespace;
+				}
 			}
 			if( isset( $config['middleware'] ) ) {
 				$return['middleware'] = array_merge( $return['middleware'], $config['middleware'] );
