@@ -1,0 +1,4 @@
+{"providers":["Ensphere\\Backbone\\Providers\\AppServiceProvider","Ensphere\\Backbone\\Providers\\RouteServiceProvider"],"middleware":["Ensphere\\Backbone\\Http\\Middleware\\Share","Ensphere\\Backbone\\Http\\Middleware\\MenuBuilder","Ensphere\\Backbone\\Http\\Middleware\\VerifyCsrfToken"],"routeMiddleware":{"auth":"Ensphere\\Backbone\\Http\\Middleware\\Authenticate","guest":"Ensphere\\Backbone\\Http\\Middleware\\RedirectIfAuthenticated","auth.basic" : "Ensphere\\Backbone\\Http\\Middleware\\AuthenticateWithBasicAuth"},"aliases" : {
+		"Form" : "Illuminate\\Html\\FormFacade",
+		"HTML" : "Illuminate\\Html\\HtmlFacade"
+	}}

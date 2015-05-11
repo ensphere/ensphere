@@ -1,0 +1,28 @@
+{
+	"jquery" : {
+		"files" : [
+			"dist/jquery.min.js"
+		]
+	},
+	"alertify.js" : {
+		"dependencies" : [
+			"jquery",
+			"bootstrap"
+		],
+		"files" : [
+			"lib/alertify.min.js",
+			"themes/alertify.core.css",
+			"themes/alertify.default.css"
+		]
+	},
+	"bootstrap" : {
+		"dependencies" : [
+			"jquery"
+		],
+		"files" : [
+			"dist/js/bootstrap.min.js",
+			"dist/css/bootstrap.min.css",
+			"dist/css/bootstrap-theme.min.css"
+		]
+	}
+}

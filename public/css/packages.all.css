@@ -1,0 +1,56 @@
+body {
+  background: #2f4050; }
+  body #wrapper .navbar-static-side {
+    z-index: 101;
+    position: absolute;
+    width: 220px;
+    border-radius: 0;
+    background: #2f4050; }
+  body #page-wrapper {
+    position: inherit;
+    margin: 0 0 0 220px;
+    min-height: 1200px;
+    padding: 0 15px; }
+  body .gray-bg {
+    background-color: #f3f3f4; }
+  body .white-bg {
+    background-color: #ffffff; }
+  body .navbar-fixed-top, body .navbar-static-top {
+    background: #f3f3f4; }
+  body .dropdown-menu {
+    min-width: 100%; }
+  body .navbar.navbar-default {
+    margin-bottom: 0;
+    border-radius: 0;
+    border-top: none;
+    background: white; }
+  body #content {
+    padding: 20px 0; }
+    body #content td span.btn-xs {
+      margin-bottom: 3px; }
+  body #user-block {
+    padding: 40px;
+    background: white; }
+    body #user-block .gravatar {
+      border-radius: 100%;
+      max-width: 100%;
+      height: auto;
+      border: 1px solid #f3f3f4; }
+  body .nav-pills > li {
+    margin: 0 0 1px 0; }
+    body .nav-pills > li > a, body .nav-pills > li > a:visited {
+      border-radius: 0;
+      padding: 15px 20px;
+      background: #1abc9c;
+      color: white; }
+      body .nav-pills > li > a i, body .nav-pills > li > a:visited i {
+        width: 20px; }
+    body .nav-pills > li.has-children > ul {
+      background: white;
+      padding: 20px; }
+      body .nav-pills > li.has-children > ul li {
+        list-style: none; }
+
+
+/*# sourceMappingURL=backbone.css.map */
+/*# sourceMappingURL=packages.all.css.map */
