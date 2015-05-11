@@ -228,12 +228,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/ensphere/backbone.git",
-                "reference": "a71b893ddcca8c9ce9ffcaa455375fe27fb21e26"
+                "reference": "b506fedd1048ce4fe549aa80d9288e86af72404d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ensphere/backbone/zipball/a71b893ddcca8c9ce9ffcaa455375fe27fb21e26",
-                "reference": "a71b893ddcca8c9ce9ffcaa455375fe27fb21e26",
+                "url": "https://api.github.com/repos/ensphere/backbone/zipball/b506fedd1048ce4fe549aa80d9288e86af72404d",
+                "reference": "b506fedd1048ce4fe549aa80d9288e86af72404d",
                 "shasum": ""
             },
             "require": {
@@ -273,7 +273,7 @@
                 "source": "https://github.com/ensphere/backbone/tree/master",
                 "issues": "https://github.com/ensphere/backbone/issues"
             },
-            "time": "2015-05-11 20:37:11"
+            "time": "2015-05-11 20:52:29"
         },
         {
             "name": "illuminate/html",
