@@ -71,12 +71,14 @@ class GenerateAssets extends Command {
 	 */
 	public function fire()
 	{
-		$it = new RecursiveDirectoryIterator( public_path( 'package' ) );
-		foreach( new RecursiveIteratorIterator( $it ) as $file ) {
-			if( $file->getFilename() === 'assets.json' ) {
-				$packages = $this->getPackages( $file->getPath() );
-				foreach( $packages as $name => $packageData ) {
-					$this->bowers[] = new Bower( $name, $packageData );
+		if( file_exists( public_path( 'package' ) ) ) {
+			$it = new RecursiveDirectoryIterator( public_path( 'package' ) );
+			foreach( new RecursiveIteratorIterator( $it ) as $file ) {
+				if( $file->getFilename() === 'assets.json' ) {
+					$packages = $this->getPackages( $file->getPath() );
+					foreach( $packages as $name => $packageData ) {
+						$this->bowers[] = new Bower( $name, $packageData );
+					}
 				}
 			}
 		}
