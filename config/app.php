@@ -136,14 +136,8 @@ return [
 	], [
 
 		/*
-		 * Application Service Providers...
+		 * Application Service Providers, if this is a module, don't register them here, use the registration.json file.
 		 */
-
-		'Ensphere\Ensphere\Providers\AppServiceProvider',
-		'Ensphere\Ensphere\Providers\BusServiceProvider',
-		'Ensphere\Ensphere\Providers\ConfigServiceProvider',
-		'Ensphere\Ensphere\Providers\EventServiceProvider',
-		'Ensphere\Ensphere\Providers\RouteServiceProvider',
 
 	]),
 

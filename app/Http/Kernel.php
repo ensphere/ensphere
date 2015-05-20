@@ -7,18 +7,20 @@ use Illuminate\Contracts\Foundation\Application;
 class Kernel extends HttpKernel {
 
 	/**
-	 * The application's global HTTP middleware stack.
-	 *
-	 * @var array
+	 * $middleware
+	 * ONLY DEFINE MIDDLEWARE IF THIS IS AN APPLICATION.
+	 * IF A MODULE, SET IN THE REGISTRATION.JSON FILE
+	 * @var [type]
 	 */
 	protected $middleware = [
 
 	];
 
 	/**
-	 * The application's route middleware.
-	 *
-	 * @var array
+	 * $routeMiddleware
+	 * ONLY DEFINE MIDDLEWARE IF THIS IS AN APPLICATION.
+	 * IF A MODULE, SET IN THE REGISTRATION.JSON FILE
+	 * @var [type]
 	 */
 	protected $routeMiddleware = [
 
