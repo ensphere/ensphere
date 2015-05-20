@@ -1,5 +1,6 @@
 /vendor
 /node_modules
+/config/packages.json
 .env
 config/packages.json
 composer.lock
