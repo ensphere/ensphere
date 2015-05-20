@@ -16,12 +16,6 @@ class Registration extends Command {
 	protected $name = 'ensphere:register';
 
 	/**
-	 * [$moduleRegistrationFile description]
-	 * @var string
-	 */
-	protected $moduleRegistrationFile = 'registration.json';
-
-	/**
 	 * The console command description.
 	 *
 	 * @var string
@@ -63,9 +57,9 @@ class Registration extends Command {
 	 */
 	protected function getPendingPackageDirs() {
 		$files = [];
-		$moduleRegistrationFilePath = base_path( $this->moduleRegistrationFile );
+		$moduleRegistrationFilePath = base_path( 'registration.json' );
 		if( file_exists( $moduleRegistrationFilePath ) ) {
-			$files[] = $moduleRegistrationFilePath;
+			$files[] = base_path();
 		}
 		$it = new RecursiveDirectoryIterator( base_path( 'vendor' ) );
 		foreach( new RecursiveIteratorIterator( $it ) as $file ) {
