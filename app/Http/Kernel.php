@@ -38,8 +38,10 @@ class Kernel extends HttpKernel {
 			'Illuminate\Cookie\Middleware\EncryptCookies',
 			'Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse',
 			'Illuminate\Session\Middleware\StartSession',
-			'Illuminate\View\Middleware\ShareErrorsFromSession'],
-		$this->middleware );
+			'Illuminate\View\Middleware\ShareErrorsFromSession'
+		],
+			$this->middleware
+		);
 		parent::__construct( $app, $router );
 	}
 

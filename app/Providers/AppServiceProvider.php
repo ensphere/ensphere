@@ -1,6 +1,7 @@
 <?php namespace Ensphere\Ensphere\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Libs\Helper;
 
 class AppServiceProvider extends ServiceProvider {
 
@@ -11,7 +12,12 @@ class AppServiceProvider extends ServiceProvider {
 	 */
 	public function boot()
 	{
-		//
+		$this->loadViewsFrom( __DIR__ . '/../../resources/views', 'ensphere.ensphere' );
+		if( Helper::isModule() ) {
+			$this->publishes([
+				__DIR__ . '/../../public/ensphere/ensphere/' => base_path( 'public/ensphere/ensphere/' ),
+			]);
+		}
 	}
 
 	/**
