@@ -143,14 +143,14 @@ class GenerateAssets extends Command {
 	private function generateTemplate() {
 		$js = $this->getJavascriptFiles();
 		$tmpl  = '';
-		foreach( $js as $uri ) $tmpl .= '<script type="text/javascript" src="' . $uri . '"></script>' . "\n\t";
+		foreach( $js as $uri ) $tmpl .= "\t\t" . '<script type="text/javascript" src="' . $uri . '"></script>' . "\n";
 		touch($this->writePath);
-		file_put_contents( $this->writePath . 'jsLoader.blade.php', $tmpl );
+		file_put_contents( $this->writePath . 'js-loader.blade.php', $tmpl );
 		$css = $this->getStyleFiles();
 		$tmpl  = '';
-		foreach( $css as $uri ) $tmpl .= '<link href="' . $uri . '" rel="stylesheet">' . "\n\t";
+		foreach( $css as $uri ) $tmpl .= "\t\t" . '<link href="' . $uri . '" rel="stylesheet">' . "\n";
 		touch($this->writePath);
-		file_put_contents( $this->writePath . 'cssLoader.blade.php', $tmpl );
+		file_put_contents( $this->writePath . 'css-loader.blade.php', $tmpl );
 	}
 
 	/**
