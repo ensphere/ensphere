@@ -30,15 +30,12 @@
 		"post-install-cmd": [
 			"php artisan clear-compiled",
 			"php artisan optimize",
-			"php artisan ensphere:register",
-			"php artisan vendor:publish --force",
-			"php artisan ensphere:assets",
-			"npm install",
-			"gulp"
+			"npm install"
 		],
 		"post-update-cmd": [
 			"php artisan clear-compiled",
 			"php artisan optimize",
+			"bower update",
 			"php artisan ensphere:register",
 			"php artisan vendor:publish --force",
 			"php artisan ensphere:assets",
@@ -46,8 +43,7 @@
 		],
 		"post-create-project-cmd": [
 			"php -r \"copy('.env.example', '.env');\"",
-			"php artisan key:generate",
-			"npm install"
+			"php artisan key:generate"
 		]
 	},
 	"config": {

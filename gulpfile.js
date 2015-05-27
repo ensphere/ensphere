@@ -17,6 +17,7 @@ elixir(function(mix) {
     .sass("ensphere.scss", "public/package/ensphere/ensphere/css")
     .copy("resources/assets/images/", "public/package/ensphere/ensphere/images/")
 	.copy("resources/assets/js/", "public/package/ensphere/ensphere/js/")
+	.copy("assets.json", "public/package/ensphere/ensphere/assets.json")
 
 	// Dependencies
 	.copy("vendor/bower_components/bootstrap", "public/vendor/bootstrap")

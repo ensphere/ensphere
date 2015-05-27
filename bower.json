@@ -1,4 +1,5 @@
 {
+	"name" : "ensphere",
 	"dependencies" : {
 		"bootstrap" : "~3.3.2",
 		"jquery" : "*"
