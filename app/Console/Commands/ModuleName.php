@@ -95,7 +95,22 @@ class ModuleName extends Command {
 		$this->camelCasedModule = ucfirst( camel_case( $this->module ) );
 		$this->laravelRename();
 		$this->moduleRename();
-		$this->info("done! now run 'php composer dump-autoload'");
+		$this->dumpAutoload();
+		$this->info("done!");
+	}
+
+	/**
+	 * [dumpAutoload description]
+	 * @return [type] [description]
+	 */
+	private function dumpAutoload() {
+		$localComposerFile = base_path('composer.phar');
+		if( file_exists( $localComposerFile ) ) {
+			echo shell_exec("php {$localComposerFile} dump-autoload");
+			$this->info("...autoload dumped!");
+		} else {
+			$this->info("Couldn't find local composer file, please run dump-autoload via composer");
+		}
 	}
 
 	/**
