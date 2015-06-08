@@ -6,6 +6,15 @@ use Libs\Helper;
 class AppServiceProvider extends ServiceProvider {
 
 	/**
+	 * [isModule description]
+	 * @return boolean [description]
+	 */
+	public static function isModule() {
+		return file_exists( __DIR__ . "/../../../../../vendor" );
+	}
+
+
+	/**
 	 * Bootstrap any application services.
 	 *
 	 * @return void
@@ -13,9 +22,9 @@ class AppServiceProvider extends ServiceProvider {
 	public function boot()
 	{
 		$this->loadViewsFrom( __DIR__ . '/../../resources/views', 'ensphere.ensphere' );
-		if( Helper::isModule() ) {
+		if( self::isModule() ) {
 			$this->publishes([
-				__DIR__ . '/../../public/ensphere/ensphere/' => base_path( 'public/ensphere/ensphere/' ),
+				__DIR__ . '/../../public/package/ensphere/ensphere/' => base_path( 'public/package/ensphere/ensphere/' ),
 			]);
 		}
 	}

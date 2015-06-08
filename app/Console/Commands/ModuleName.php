@@ -163,6 +163,7 @@ class ModuleName extends Command {
 		if( ! file_exists( $file ) ) return;
 		$contents = file_get_contents( $file );
 		$newContents = str_replace( "{$this->currentCamelCasedVendor}\\\\{$this->currentCamelCasedModule}", "{$this->camelCasedVendor}\\\\{$this->camelCasedModule}", $contents );
+		$newContents = str_replace( "\"{$this->currentVendor}/{$this->currentModule}\"", "\"{$this->vendor}/{$this->module}\"", $newContents );
 		file_put_contents( $file, $newContents );
 	}
 
