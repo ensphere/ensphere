@@ -4,6 +4,9 @@
 	"keywords": ["framework"],
 	"license": "MIT",
 	"type": "project",
+	"repositories": [
+ 		{ "type": "composer", "url": "http://ensphere.modules.uste.co.uk/" }
+    ],
 	"require": {
 		"laravel/framework": "5.0.*",
 		"illuminate/html": "5.*",
