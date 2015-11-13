@@ -22,3 +22,4 @@ If you are creating a module and not the start of a base application, do not use
 
 When requiring assets (js/css), you must use bower.
 
+Run gulp and get cracking!
