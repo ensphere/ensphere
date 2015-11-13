@@ -22,4 +22,8 @@ If you are creating a module and not the start of a base application, do not use
 
 When requiring assets (js/css), you must use bower.
 
+(if the install fails due to node install hanging up, run ```artisan ensphere:register``` and you may need to run ```npm update``` to start developing)
+
+re ```artisan serve```
+
 Run gulp and get cracking!
