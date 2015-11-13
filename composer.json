@@ -5,7 +5,7 @@
 	"license": "MIT",
 	"type": "project",
 	"repositories": [
- 		{ "type": "composer", "url": "http://ensphere.modules.uste.co.uk/" }
+ 		{ "type": "composer", "url": "http://ensphere.modules.wden.co.uk/" }
     ],
 	"require": {
 		"laravel/framework": "5.0.*",
