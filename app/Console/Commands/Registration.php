@@ -127,7 +127,7 @@ class Registration extends Command {
 	 */
 	protected function save( $config ) {
 		touch($this->writePath);
-		file_put_contents( $this->writePath, json_encode( $config ) );
+		file_put_contents( $this->writePath, json_encode( $config, JSON_PRETTY_PRINT ) );
 	}
 
 }

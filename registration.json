@@ -7,7 +7,6 @@
 	},
 	"providers" : [
 		"Ensphere\\Ensphere\\Providers\\AppServiceProvider",
-		"Ensphere\\Ensphere\\Providers\\BusServiceProvider",
 		"Ensphere\\Ensphere\\Providers\\ConfigServiceProvider",
 		"Ensphere\\Ensphere\\Providers\\EventServiceProvider",
 		"Ensphere\\Ensphere\\Providers\\RouteServiceProvider"
