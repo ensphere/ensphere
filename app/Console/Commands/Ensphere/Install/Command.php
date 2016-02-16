@@ -35,7 +35,66 @@ class Command extends IlluminateCommand {
 	 */
 	public function fire()
 	{
+		$this->installNodeModules();
+		$this->installBowerComponents();
+		$this->generateRegistrationFile();
+		$this->publishVendorAssets();
+		$this->combineVendorAssets();
+		$this->runGulp();
+	}
 
+	/**
+	 * [installNodeModules description]
+	 * @return [type] [description]
+	 */
+	private function installNodeModules()
+	{
+		$this->info( shell_exec( "npm install" ) );
+	}
+
+	/**
+	 * [installBowerComponents description]
+	 * @return [type] [description]
+	 */
+	private function installBowerComponents()
+	{
+		$this->info( shell_exec( "bower install" ) );
+	}
+
+	/**
+	 * [generateRegistrationFile description]
+	 * @return [type] [description]
+	 */
+	private function generateRegistrationFile()
+	{
+		$this->info( shell_exec( "php artisan ensphere:register" ) );
+	}
+
+	/**
+	 * [publishVendorAssets description]
+	 * @return [type] [description]
+	 */
+	private function publishVendorAssets()
+	{
+		$this->info( shell_exec( "php artisan vendor:publish --force" ) );
+	}
+
+	/**
+	 * [combineVendorAssets description]
+	 * @return [type] [description]
+	 */
+	private function combineVendorAssets()
+	{
+		$this->info( shell_exec( "php artisan ensphere:assets" ) );
+	}
+
+	/**
+	 * [runGulp description]
+	 * @return [type] [description]
+	 */
+	private function runGulp()
+	{
+		$this->info( shell_exec( "gulp" ) );
 	}
 
 	/**

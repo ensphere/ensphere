@@ -130,10 +130,22 @@ class Command extends IlluminateCommand {
 	 */
 	private function moduleRename() {
 		$this->renamePublicFolders();
+		$this->renameDatabaseFolders();
 		$this->updateRegistrationFile();
 		$this->updateGulpFile();
 		$this->updateComposerFile();
 		$this->updatePackagesFile();
+	}
+
+	/**
+	 * [renameDatabaseFolders description]
+	 * @return [type] [description]
+	 */
+	private function renameDatabaseFolders() {
+		rename( base_path( "database/migrations/vendor/{$this->currentVendor}/{$this->currentModule}" ), base_path( "database/migrations/vendor/{$this->currentVendor}/{$this->module}" ) );
+		rename( base_path( "database/migrations/vendor/{$this->currentVendor}" ), base_path( "database/migrations/vendor/{$this->vendor}" ) );
+		rename( base_path( "database/seeds/vendor/{$this->currentVendor}/{$this->currentModule}" ), base_path( "database/seeds/vendor/{$this->currentVendor}/{$this->module}" ) );
+		rename( base_path( "database/seeds/vendor/{$this->currentVendor}" ), base_path( "database/seeds/vendor/{$this->vendor}" ) );
 	}
 
 	/**
