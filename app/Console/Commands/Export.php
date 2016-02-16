@@ -42,7 +42,7 @@ class Export extends Command {
 	 */
 	private function exportMigrations()
 	{
-		$databaseFolder = base_path( 'database/migrations/vendor/authentication/' );
+		$databaseFolder = base_path( 'database/migrations/vendor/' . $this->currentStructure['vendor'] . '/' . $this->currentStructure['module'] . '/' );
 		if( ! file_exists( $databaseFolder ) ) {
 			return $this->line( 'no migrations to move' );
 		}
