@@ -35,12 +35,15 @@ class Command extends IlluminateCommand {
 	 */
 	public function fire()
 	{
-		$this->installNodeModules();
-		$this->installBowerComponents();
-		$this->generateRegistrationFile();
-		$this->publishVendorAssets();
-		$this->combineVendorAssets();
-		$this->runGulp();
+		if( ! $this->hasBeenInstalled() ) {
+			$this->installNodeModules();
+			$this->installBowerComponents();
+			$this->generateRegistrationFile();
+			$this->publishVendorAssets();
+			$this->combineVendorAssets();
+			$this->runGulp();
+			$this->defineAsinstalled();
+		}
 	}
 
 	/**
@@ -95,6 +98,24 @@ class Command extends IlluminateCommand {
 	private function runGulp()
 	{
 		$this->info( shell_exec( "gulp" ) );
+	}
+
+	/**
+	 * [hasBeenInstalled description]
+	 * @return boolean [description]
+	 */
+	private function hasBeenInstalled()
+	{
+		return file_exists( __DIR__ . '/.installed');
+	}
+
+	/**
+	 * [defineAsinstalled description]
+	 * @return [type] [description]
+	 */
+	private function defineAsinstalled()
+	{
+		touch( __DIR__ . '/.installed' );
 	}
 
 	/**

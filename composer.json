@@ -30,27 +30,16 @@
 	"scripts": {
 		"post-install-cmd": [
 			"php artisan clear-compiled",
-			"php artisan optimize",
-			"npm install",
-			"bower install",
-			"php artisan ensphere:register",
-			"php artisan vendor:publish --force",
-			"php artisan ensphere:assets",
-			"gulp"
+			"php artisan optimize"
 		],
 		"post-update-cmd": [
 			"php artisan clear-compiled",
-			"php artisan optimize",
-			"bower update",
-			"php artisan ensphere:register",
-			"php artisan vendor:publish --force",
-			"php artisan ensphere:assets",
-			"php artisan migrate",
-			"gulp"
+			"php artisan optimize"
 		],
 		"post-create-project-cmd": [
 			"php -r \"copy('.env.example', '.env');\"",
-			"php artisan key:generate"
+			"php artisan key:generate",
+			"php artisan ensphere:install"
 		]
 	},
 	"config": {
