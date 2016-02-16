@@ -4,3 +4,4 @@
 /config/packages.json
 config/packages.json
 composer.lock
+/public/vendor/*

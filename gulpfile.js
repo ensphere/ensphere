@@ -19,7 +19,7 @@ elixir(function(mix) {
 	.copy("resources/assets/js/", "public/package/ensphere/ensphere/js/")
 
 	// Dependencies
-	.copy("bower_components/bootstrap", "public/vendor/bootstrap")
+	.copy("bower_components/semantic-ui", "public/vendor/semantic-ui")
 	.copy("bower_components/jquery", "public/vendor/jquery")
 
     // Application Based Assets

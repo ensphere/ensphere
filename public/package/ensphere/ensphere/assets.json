@@ -4,14 +4,13 @@
 			"dist/jquery.min.js"
 		]
 	},
-	"bootstrap" : {
+	"semantic-ui" : {
 		"dependencies" : [
 			"jquery"
 		],
 		"files" : [
-			"dist/js/bootstrap.min.js",
-			"dist/css/bootstrap.min.css",
-			"dist/css/bootstrap-theme.min.css"
+			"dist/semantic.min.css",
+			"dist/semantic.min.js"
 		]
 	}
 }

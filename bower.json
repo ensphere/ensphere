@@ -1,7 +1,7 @@
 {
 	"name" : "ensphere",
 	"dependencies" : {
-		"bootstrap" : "~3.3.2",
+		"semantic-ui" : "2.1.8",
 		"jquery" : "*"
 	}
 }
