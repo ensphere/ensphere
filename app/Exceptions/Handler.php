@@ -1,6 +1,6 @@
 <?php
 
-namespace Ensphere\Authentication\Exceptions;
+namespace Ensphere\Ensphere\Exceptions;
 
 use Exception;
 use Illuminate\Auth\Access\AuthorizationException;
