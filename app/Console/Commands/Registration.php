@@ -1,4 +1,4 @@
-<?php namespace Ensphere\Ensphere\Console\Commands;
+<?php namespace Ensphere\Authentication\Console\Commands;
 
 use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputOption;
@@ -97,7 +97,8 @@ class Registration extends Command {
 			'providers' => array(),
 			'aliases' => array(),
 			'middleware' => array(),
-			'routeMiddleware' => array()
+			'routeMiddleware' => array(),
+			'middlewareGroups' => array()
 		];
 		foreach( $configs as $config ) {
 			if( isset( $config['providers'] ) ) {
@@ -114,6 +115,14 @@ class Registration extends Command {
 			if( isset( $config['routeMiddleware'] ) ) {
 				foreach( $config['routeMiddleware'] as $name => $namespace ) {
 					$return['routeMiddleware'][$name] = $namespace;
+				}
+			}
+			if( isset( $config['middlewareGroups'] ) ) {
+				foreach( $config['middlewareGroups'] as $groupName => $groupArray ) {
+					if( ! isset( $return['middlewareGroups'][$groupName] ) ) {
+						$return['middlewareGroups'][$groupName] = array();
+					}
+					$return['middlewareGroups'][$groupName] = $groupArray;
 				}
 			}
 		}
