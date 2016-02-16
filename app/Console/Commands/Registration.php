@@ -1,4 +1,4 @@
-<?php namespace Ensphere\Authentication\Console\Commands;
+<?php namespace Ensphere\Ensphere\Console\Commands;
 
 use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputOption;
