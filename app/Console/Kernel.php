@@ -15,7 +15,8 @@ class Kernel extends ConsoleKernel {
 		'Ensphere\Ensphere\Console\Commands\GenerateAssets',
 		'Ensphere\Ensphere\Console\Commands\Registration',
 		'Ensphere\Ensphere\Console\Commands\ModuleName',
-		'Ensphere\Ensphere\Console\Commands\Export'
+		'Ensphere\Ensphere\Console\Commands\Export',
+		'Ensphere\Ensphere\Console\Commands\Migrate'
 	];
 
 	/**
