@@ -43,6 +43,8 @@ class Command extends IlluminateCommand {
 			$this->combineVendorAssets();
 			$this->runGulp();
 			$this->defineAsinstalled();
+		} else {
+			$this->error( "application has already ran the install process --canceled" );
 		}
 	}
 
