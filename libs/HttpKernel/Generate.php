@@ -38,4 +38,21 @@ class Generate {
 		return array_merge( $packageRouteMiddleware, $routeMiddleware );
 	}
 
+	/**
+	 * [middlewareGroups description]
+	 * @param  array  $middlewareGroups [description]
+	 * @return [type]                   [description]
+	 */
+	public static function middlewareGroups( $middlewareGroups = array() ) {
+		$packageMiddlewareGroups = array();
+		$path = base_path('config/packages.json');
+		if( file_exists( $path ) ) {
+			$data = json_decode( file_get_contents( $path ) );
+			if( isset( $data->middlewareGroups ) ) {
+				$packageMiddlewareGroups = (array)$data->middlewareGroups;
+			}
+		}
+		return ( $packageMiddlewareGroups + $middlewareGroups );
+	}
+
 }
