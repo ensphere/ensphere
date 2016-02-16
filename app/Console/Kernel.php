@@ -11,12 +11,14 @@ class Kernel extends ConsoleKernel {
 	 * @var array
 	 */
 	protected $commands = [
-		'Ensphere\Ensphere\Console\Commands\Inspire',
-		'Ensphere\Ensphere\Console\Commands\GenerateAssets',
-		'Ensphere\Ensphere\Console\Commands\Registration',
-		'Ensphere\Ensphere\Console\Commands\ModuleName',
-		'Ensphere\Ensphere\Console\Commands\Export',
-		'Ensphere\Ensphere\Console\Commands\Migrate'
+
+		'Ensphere\Ensphere\Console\Commands\Ensphere\Rename\Command',
+		'Ensphere\Ensphere\Console\Commands\Ensphere\Export\Command',
+		'Ensphere\Ensphere\Console\Commands\Ensphere\Assets\Command',
+		'Ensphere\Ensphere\Console\Commands\Ensphere\Migrate\Command',
+		'Ensphere\Ensphere\Console\Commands\Ensphere\Registration\Command',
+		'Ensphere\Ensphere\Console\Commands\Ensphere\Install\Command',
+
 	];
 
 	/**

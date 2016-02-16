@@ -1,13 +1,12 @@
-<?php namespace Ensphere\Ensphere\Console\Commands;
+<?php namespace Ensphere\Ensphere\Console\Commands\Ensphere\Assets;
 
-use Illuminate\Console\Command;
+use Illuminate\Console\Command as IlluminateCommand;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
-use Ensphere\Ensphere\Console\Commands\GenerateAssets\Bower;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 
-class GenerateAssets extends Command {
+class Command extends IlluminateCommand {
 
 	/**
 	 * The console command name.

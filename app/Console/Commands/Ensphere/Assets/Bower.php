@@ -1,4 +1,4 @@
-<?php namespace Ensphere\Ensphere\Console\Commands\GenerateAssets;
+<?php namespace Ensphere\Ensphere\Console\Commands\Ensphere\Assets;
 
 class Bower {
 
