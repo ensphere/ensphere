@@ -21,7 +21,7 @@ class Command extends IlluminateCommand {
 	 * [$description description]
 	 * @var string
 	 */
-	protected $description = 'Initial installation for application';
+	protected $description = 'Update vendor and application dependencies.';
 
 	/**
 	 * [$currentStructure description]
@@ -35,7 +35,36 @@ class Command extends IlluminateCommand {
 	 */
 	public function fire()
 	{
+		$this->generateRegistrationFile();
+		$this->publishVendorAssets();
+		$this->combineVendorAssets();
+	}
 
+	/**
+	 * [generateRegistrationFile description]
+	 * @return [type] [description]
+	 */
+	private function generateRegistrationFile()
+	{
+		$this->info( shell_exec( "php artisan ensphere:register" ) );
+	}
+
+	/**
+	 * [publishVendorAssets description]
+	 * @return [type] [description]
+	 */
+	private function publishVendorAssets()
+	{
+		$this->info( shell_exec( "php artisan vendor:publish --force" ) );
+	}
+
+	/**
+	 * [combineVendorAssets description]
+	 * @return [type] [description]
+	 */
+	private function combineVendorAssets()
+	{
+		$this->info( shell_exec( "php artisan ensphere:assets" ) );
 	}
 
 	/**
