@@ -45,6 +45,7 @@
 			"php artisan ensphere:register",
 			"php artisan vendor:publish --force",
 			"php artisan ensphere:assets",
+			"php artisan migrate",
 			"gulp"
 		],
 		"post-create-project-cmd": [
