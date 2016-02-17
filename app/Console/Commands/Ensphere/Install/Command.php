@@ -54,7 +54,7 @@ class Command extends IlluminateCommand {
 	 */
 	private function installNodeModules()
 	{
-		$this->info( shell_exec( "npm install  --progress=false" ) );
+		$this->info( shell_exec( "npm install --silent" ) );
 	}
 
 	/**
