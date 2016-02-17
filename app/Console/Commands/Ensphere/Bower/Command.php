@@ -179,8 +179,8 @@ class Command extends IlluminateCommand {
 	 */
 	private function generateTemplate()
 	{
-		$js = $this->getJavascriptFiles() + $this->getModuleJsFiles();
-		$css = $this->getStyleFiles() + $this->getModuleCssFiles();
+		$js = array_merge( $this->getJavascriptFiles(), $this->getModuleJsFiles() );
+		$css = array_merge( $this->getStyleFiles(), $this->getModuleCssFiles() );
 		file_put_contents( $this->writePath . 'loader.blade.php', self::assetLoaderTemplate( $js, $css ) );
 	}
 
