@@ -9,11 +9,15 @@ Create a local database called `l5` with credentials `root` `root` (make sure it
 Open up `~/.bash_profile` and add the following function and then restart terminal:
 
 ```
+alias composer="php ~/composer.phar"
+alias artisan="php artisan"
 function _ensphere {
 	composer create-project ensphere/ensphere --repository-url=http://pmcom.packagist.wden.co.uk/ --stability=dev "$1"
 }
 alias ensphere=_ensphere
 ```
+
+if you haven't got composer installed globally, go to `https://getcomposer.org/composer.phar` and save it in `~/composer.phar`
 
 ## Test case
 
