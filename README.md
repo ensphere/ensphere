@@ -4,6 +4,11 @@ I've writen this to build a process for creating modular based applications. It 
 
 ## Test case preperation:
 
+Firstly make sure you have bower installed (run `bower` to check)
+```
+npm install -g bower
+```
+
 Create a local database called `l5` with credentials `root` `root` (make sure it's empty).
 
 Open up `~/.bash_profile` and add the following function and then restart terminal:
