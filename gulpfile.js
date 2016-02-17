@@ -22,7 +22,4 @@ elixir(function(mix) {
 	.copy("bower_components/semantic-ui", "public/vendor/semantic-ui")
 	.copy("bower_components/jquery", "public/vendor/jquery")
 
-    // Application Based Assets
-    .stylesIn("public/package/", "public/css/packages.all.css")
-    .scriptsIn("public/package/", "public/js/packages.all.js");
 });

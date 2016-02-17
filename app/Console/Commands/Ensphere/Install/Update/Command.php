@@ -38,7 +38,7 @@ class Command extends IlluminateCommand {
 		$this->generateRegistrationFile();
 		$this->publishVendorAssets();
 		$this->combineVendorAssets();
-		$this->runGulp();
+		$this->combineDependencyAssets();
 		$this->migrateRun();
 	}
 
@@ -73,18 +73,18 @@ class Command extends IlluminateCommand {
 	 * [combineVendorAssets description]
 	 * @return [type] [description]
 	 */
-	private function combineVendorAssets()
+	private function combineDependencyAssets()
 	{
-		$this->info( shell_exec( "php artisan ensphere:assets" ) );
+		$this->info( shell_exec( "php artisan ensphere:bower" ) );
 	}
 
 	/**
-	 * [runGulp description]
+	 * [combineVendorAssets description]
 	 * @return [type] [description]
 	 */
-	private function runGulp()
+	private function combineVendorAssets()
 	{
-		$this->info( shell_exec( "gulp" ) );
+		$this->info( shell_exec( "php artisan ensphere:assets" ) );
 	}
 
 	/**

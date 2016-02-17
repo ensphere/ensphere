@@ -14,6 +14,7 @@ class Kernel extends ConsoleKernel {
 
 		'Ensphere\Ensphere\Console\Commands\Ensphere\Rename\Command',
 		'Ensphere\Ensphere\Console\Commands\Ensphere\Export\Command',
+		'Ensphere\Ensphere\Console\Commands\Ensphere\Bower\Command',
 		'Ensphere\Ensphere\Console\Commands\Ensphere\Assets\Command',
 		'Ensphere\Ensphere\Console\Commands\Ensphere\Migrate\Command',
 		'Ensphere\Ensphere\Console\Commands\Ensphere\Registration\Command',

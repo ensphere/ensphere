@@ -1,5 +1,6 @@
 <?php namespace Ensphere\Ensphere\Console\Commands\Ensphere\Assets;
 
+use Ensphere\Ensphere\Console\Commands\Ensphere\Traits\Module as ModuleTrait;
 use Illuminate\Console\Command as IlluminateCommand;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
@@ -8,200 +9,106 @@ use RecursiveIteratorIterator;
 
 class Command extends IlluminateCommand {
 
+	use ModuleTrait;
+
 	/**
-	 * The console command name.
-	 *
+	 * [$name description]
 	 * @var string
 	 */
 	protected $name = 'ensphere:assets';
 
 	/**
-	 * The console command description.
-	 *
+	 * [$description description]
 	 * @var string
 	 */
-	protected $description = 'Compacts Bower Components.';
+	protected $description = 'Combines the module assets into single files';
 
 	/**
-	 * [$writePath description]
-	 * @var null
-	 */
-	private $writePath = 'resources/views/';
-
-	/**
-	 * [$order description]
+	 * [$dir description]
 	 * @var [type]
 	 */
-	private $order = [];
+	protected $dir;
 
 	/**
-	 * [$ordered description]
-	 * @var [type]
-	 */
-	private $ordered = [];
-
-	/**
-	 * [$satisfield description]
-	 * @var integer
-	 */
-	private $satisfield = 0;
-
-	/**
-	 * [$bowers description]
-	 * @var [type]
-	 */
-	private $bowers = [];
-
-	/**
-	 * Create a new command instance.
-	 *
-	 * @return void
-	 */
-	public function __construct()
-	{
-		parent::__construct();
-		$this->writePath = base_path($this->writePath);
-	}
-
-	/**
-	 * Execute the console command.
-	 *
-	 * @return mixed
+	 * [fire description]
+	 * @return [type] [description]
 	 */
 	public function fire()
 	{
-		if( file_exists( public_path( 'package' ) ) ) {
-			$it = new RecursiveDirectoryIterator( public_path( 'package' ) );
+		$this->dir = public_path( 'package' );
+		$cssFiles = $this->getModuleCssFiles();
+		$jsFiles = $this->getModuleJsFiles();
+		$this->combine( $cssFiles, public_path( 'css/packages.all.css' ) );
+		$this->combine( $jsFiles, public_path( 'js/packages.all.js' ) );
+	}
+
+	/**
+	 * [combine description]
+	 * @param  array  $files        [description]
+	 * @param  [type] $savePathname [description]
+	 * @return [type]               [description]
+	 */
+	protected function combine( array $files, $savePathname ) {
+		$data = '';
+		foreach( $files as $file ) {
+			$data .= file_get_contents( $file );
+		}
+		file_put_contents( $savePathname, $data );
+		$this->info( count( $files ) . " combined to {$savePathname}");
+	}
+
+	/**
+	 * [getModuleJsFiles description]
+	 * @return [type] [description]
+	 */
+	protected function getModuleJsFiles()
+	{
+		$files = array();
+		if( file_exists( $this->dir ) ) {
+			$it = new RecursiveDirectoryIterator( $this->dir );
 			foreach( new RecursiveIteratorIterator( $it ) as $file ) {
-				if( $file->getFilename() === 'assets.json' ) {
-					$packages = $this->getPackages( $file->getPath() );
-					foreach( $packages as $name => $packageData ) {
-						$this->bowers[] = new Bower( $name, $packageData );
-					}
+				if( $file->getExtension() === 'js' ) {
+					$files[] = $file->getPathname();
 				}
 			}
-		}
-		// Order the array by dependencies
-		$this->order();
-		// Generate the blade template
-		$this->generateTemplate();
-	}
-
-	/**
-	 * [getPackages description]
-	 * @param  [type] $path [description]
-	 * @return [type]       [description]
-	 */
-	private function getPackages( $path ) {
-		return json_decode( file_get_contents( $path . '/assets.json' ) );
-	}
-
-	/**
-	 * [order description]
-	 * @return [type] [description]
-	 */
-	private function order() {
-		foreach( $this->bowers as $bower ) {
-			$this->order[$bower->name()] = [
-				'dependencies' => $bower->getDependencies(),
-				'bower' => $bower
-			];
-		}
-		$this->orderItems();
-	}
-
-	/**
-	 * [orderItems description]
-	 * @return [type] [description]
-	 */
-	private function orderItems(){
-		while( ! empty( $this->order ) ) {
-			$item = array_splice( $this->order, 0, 1 );
-			$data = end( $item );
-			$name = key( $item );
-			if( empty( $data['dependencies'] ) ) {
-				$this->ordered[$name] = $data;
-			} else {
-				$satisafied = true;
-				foreach( $data['dependencies'] as $dependency ) {
-					if( isset( $this->order[$dependency] ) ) $satisafied = false;
-				}
-				if( $satisafied ) {
-					$this->ordered[$name] = $data;
-				} else {
-					$this->order = $this->order + $item;
-				}
-			}
-		}
-	}
-
-	/**
-	 * [generateTemplate description]
-	 * @return [type] [description]
-	 */
-	private function generateTemplate() {
-		$js = $this->getJavascriptFiles();
-		$tmpl  = '';
-		foreach( $js as $uri ) $tmpl .= "\t\t" . '<script type="text/javascript" src="' . $uri . '"></script>' . "\n";
-		touch($this->writePath);
-		file_put_contents( $this->writePath . 'js-loader.blade.php', $tmpl );
-		$css = $this->getStyleFiles();
-		$tmpl  = '';
-		foreach( $css as $uri ) $tmpl .= "\t\t" . '<link href="' . $uri . '" rel="stylesheet">' . "\n";
-		touch($this->writePath);
-		file_put_contents( $this->writePath . 'css-loader.blade.php', $tmpl );
-	}
-
-	/**
-	 * [getJavascriptFiles description]
-	 * @return [type] [description]
-	 */
-	private function getJavascriptFiles() {
-		$files = [];
-		foreach( $this->ordered as $data ) {
-			$bower = $data['bower'];
-			$files = array_merge( $files, $bower->getJavascriptFiles() );
 		}
 		return $files;
 	}
 
 	/**
-	 * [getStyleFiles description]
+	 * [getModuleCssFiles description]
 	 * @return [type] [description]
 	 */
-	private function getStyleFiles() {
-		$files = [];
-		foreach( $this->ordered as $data ) {
-			$bower = $data['bower'];
-			$files = array_merge( $files, $bower->getStyleFiles() );
+	protected function getModuleCssFiles()
+	{
+		$files = array();
+		if( file_exists( $this->dir ) ) {
+			$it = new RecursiveDirectoryIterator( $this->dir );
+			foreach( new RecursiveIteratorIterator( $it ) as $file ) {
+				if( $file->getExtension() === 'css' ) {
+					$files[] = $file->getPathname();
+				}
+			}
 		}
 		return $files;
 	}
 
 	/**
-	 * Get the console command arguments.
-	 *
-	 * @return array
+	 * [getArguments description]
+	 * @return [type] [description]
 	 */
 	protected function getArguments()
 	{
 		return [];
-		return [
-			['example', InputArgument::REQUIRED, 'An example argument.'],
-		];
 	}
 
 	/**
-	 * Get the console command options.
-	 *
-	 * @return array
+	 * [getOptions description]
+	 * @return [type] [description]
 	 */
 	protected function getOptions()
 	{
 		return [];
-		return [
-			['example', null, InputOption::VALUE_OPTIONAL, 'An example option.', null],
-		];
 	}
 
 }
