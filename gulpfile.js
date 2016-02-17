@@ -20,6 +20,5 @@ elixir(function(mix) {
 
 	// Dependencies
 	.copy("bower_components/semantic-ui", "public/vendor/semantic-ui")
-	.copy("bower_components/jquery", "public/vendor/jquery")
-
+	.copy("bower_components/jquery", "public/vendor/jquery");
 });
