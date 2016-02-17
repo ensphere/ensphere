@@ -49,9 +49,9 @@ artisan serve
 
 (if you already have the default port in operation use `artisan serve --port=8888`)
 
-Navigat to `/admin/login` in your browser and you should recive an error (404 Exception).
+Navigat to `http://localhost:8000/admin/login` in your browser and you should recive an error (404 Exception).
 
-Now back to terminal and require the authentication module.
+Now back to terminal and create a new tab in terminal (command + t) and then require the authentication module.
 
 ```
 composer require ensphere/authentication:dev-master
