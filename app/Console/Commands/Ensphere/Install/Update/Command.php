@@ -36,10 +36,10 @@ class Command extends IlluminateCommand {
 	public function fire()
 	{
 		$this->generateRegistrationFile();
-		$this->migrateRun();
 		$this->publishVendorAssets();
 		$this->combineVendorAssets();
 		$this->runGulp();
+		$this->migrateRun();
 	}
 
 	/**
