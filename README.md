@@ -1,7 +1,12 @@
-## ensphere - an alternative Laravel base for creating modular based applications
-This was built to bridge the gap of standalone module development without manual configuration or duplicate assets.
+# Ensphere
 
-1. Add the following to your ~/.bash_profile
+I've writen this to build a process for creating modular based applications. It is basically Laravel 5.2 with a few commands and wrappers to sync everything automatically without having to manually add middleware, service providers or aliases and to manage frontend dependencies better without duplication libraries.
+
+## Test case preperation:
+
+Create a local database called `l5` with credentials `root` `root` (make sure it's empty).
+
+Open up `~/.bash_profile` and add the following function and then restart terminal:
 
 ```
 function _ensphere {
@@ -10,25 +15,46 @@ function _ensphere {
 alias ensphere=_ensphere
 ```
 
-You can then create a new module by entering
+## Test case
 
-```ensphere modelName```
+Navigate to your documents folder
+```
+cd ~/Documents/
+```
 
-And to rename the module (this does alot more than Laravel's)
+Create a testcase folder
 
-```artisan ensphere:rename```
+```
+mkdir testcase
+```
 
-If you are creating a module and not the start of a base application, do not use the app configuration file to register service providers, aliases or middleware, define these in the registration.json file.
+and then cd into it
 
-When requiring assets (js/css), you must use bower.
+```
+cd testcase
+```
 
-If the install fails due to node install hanging up, run the following commands in order:
+Create a default application or module by running
+```
+ensphere baseapp
+```
 
-```npm update```
-```bower install```
-```php artisan ensphere:register```
-```php artisan vendor:publish --force```
-```php artisan ensphere:assets```
-```gulp```
+This will run the standard `composer create` command anlong with some extra installation (I will also run npm comands so make sure node is installed on your machine https://nodejs.org/en/).
 
-run ```artisan serve```
+Hopefully this has all installed correctly so cd into baseapp `cd baseapp` and start a server up.
+
+```
+artisan serve
+```
+
+(if you already have the default port in operation use `artisan serve --port=8888`)
+
+Navigat to `/admin/login` in your browser and you should recive an error (404 Exception).
+
+Now back to terminal and require the authentication module.
+
+```
+composer require ensphere/authentication:dev-master
+```
+
+Once installed, go back to your browser and hit refresh, boom!
