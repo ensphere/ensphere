@@ -53,7 +53,7 @@ ensphere baseapp
 
 This will run the standard `composer create` command along with some extra installation (It will also run npm commands so make sure node is installed on your machine https://nodejs.org/en/).
 
-Hopefully this has all installed correctly so cd into baseapp and start a server up.
+Hopefully this has all installed correctly so cd into baseapp and start a server up:
 
 ```
 cd baseapp
