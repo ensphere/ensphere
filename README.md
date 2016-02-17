@@ -12,6 +12,7 @@ npm install -g bower
 Create a local database called `l5` with credentials `root` `root` (make sure it's empty).
 
 Open up `~/.bash_profile` and add the following function and then restart terminal:
+(for those with hidden files not visible and using sublimetext2 run `/Applications/SublimeText2.app/Contents/SharedSupport/bin/subl ~/.bash_profile` in terminal)
 
 ```
 alias composer="php ~/composer.phar"
