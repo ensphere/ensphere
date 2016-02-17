@@ -54,6 +54,7 @@ class Command extends IlluminateCommand {
 	 */
 	private function installNodeModules()
 	{
+		$this->info('installing npm dependencies please wait...');
 		$this->info( shell_exec( "npm install --silent" ) );
 	}
 
@@ -63,6 +64,7 @@ class Command extends IlluminateCommand {
 	 */
 	private function installBowerComponents()
 	{
+		$this->info('installing bower dependencies please wait...');
 		$this->info( shell_exec( "bower install" ) );
 	}
 
@@ -72,6 +74,7 @@ class Command extends IlluminateCommand {
 	 */
 	private function generateRegistrationFile()
 	{
+		$this->info('generating registration file...');
 		$this->info( shell_exec( "php artisan ensphere:register" ) );
 	}
 
@@ -81,6 +84,7 @@ class Command extends IlluminateCommand {
 	 */
 	private function publishVendorAssets()
 	{
+		$this->info('pushing module assets to application...');
 		$this->info( shell_exec( "php artisan vendor:publish --force" ) );
 	}
 
@@ -90,6 +94,7 @@ class Command extends IlluminateCommand {
 	 */
 	private function combineVendorAssets()
 	{
+		$this->info('generating dependency config...');
 		$this->info( shell_exec( "php artisan ensphere:bower" ) );
 	}
 
