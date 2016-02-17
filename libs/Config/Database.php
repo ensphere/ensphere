@@ -11,7 +11,7 @@ class Database {
 	 */
 	public static function mySQLconnection( $array ) {
 		if ( env( 'APP_ENV' ) === 'local' && ! is_null( $socket = env( 'DB_SOCKET' ) ) ) {
-			$array['socket'] = $socket;
+			$array['unix_socket'] = $socket;
 		}
 		return $array;
 	}
