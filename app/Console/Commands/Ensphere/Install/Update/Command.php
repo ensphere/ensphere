@@ -37,7 +37,6 @@ class Command extends IlluminateCommand {
 	{
 		$this->generateRegistrationFile();
 		$this->publishVendorAssets();
-		$this->combineVendorAssets();
 		$this->combineDependencyAssets();
 		$this->migrateRun();
 	}
@@ -76,15 +75,6 @@ class Command extends IlluminateCommand {
 	private function combineDependencyAssets()
 	{
 		$this->info( shell_exec( "php artisan ensphere:bower" ) );
-	}
-
-	/**
-	 * [combineVendorAssets description]
-	 * @return [type] [description]
-	 */
-	private function combineVendorAssets()
-	{
-		$this->info( shell_exec( "php artisan ensphere:assets" ) );
 	}
 
 	/**
