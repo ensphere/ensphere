@@ -36,8 +36,19 @@ class Command extends IlluminateCommand {
 	public function fire()
 	{
 		$this->generateRegistrationFile();
+		$this->migrateRun();
 		$this->publishVendorAssets();
 		$this->combineVendorAssets();
+		$this->runGulp();
+	}
+
+	/**
+	 * [migrateRun description]
+	 * @return [type] [description]
+	 */
+	private function migrateRun()
+	{
+		$this->info( shell_exec( "php artisan ensphere:migrate run" ) );
 	}
 
 	/**
@@ -65,6 +76,15 @@ class Command extends IlluminateCommand {
 	private function combineVendorAssets()
 	{
 		$this->info( shell_exec( "php artisan ensphere:assets" ) );
+	}
+
+	/**
+	 * [runGulp description]
+	 * @return [type] [description]
+	 */
+	private function runGulp()
+	{
+		$this->info( shell_exec( "gulp" ) );
 	}
 
 	/**
