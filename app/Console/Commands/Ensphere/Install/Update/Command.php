@@ -37,8 +37,7 @@ class Command extends IlluminateCommand {
 	{
 		$this->generateRegistrationFile();
 		$this->publishVendorAssets();
-		$this->combineVendorAssets();
-		$this->runGulp();
+		$this->combineDependencyAssets();
 		$this->migrateRun();
 	}
 
@@ -57,6 +56,7 @@ class Command extends IlluminateCommand {
 	 */
 	private function generateRegistrationFile()
 	{
+		$this->info('generating registration file...');
 		$this->info( shell_exec( "php artisan ensphere:register" ) );
 	}
 
@@ -66,6 +66,7 @@ class Command extends IlluminateCommand {
 	 */
 	private function publishVendorAssets()
 	{
+		$this->info('pushing module assets to application...');
 		$this->info( shell_exec( "php artisan vendor:publish --force" ) );
 	}
 
@@ -73,18 +74,10 @@ class Command extends IlluminateCommand {
 	 * [combineVendorAssets description]
 	 * @return [type] [description]
 	 */
-	private function combineVendorAssets()
+	private function combineDependencyAssets()
 	{
-		$this->info( shell_exec( "php artisan ensphere:assets" ) );
-	}
-
-	/**
-	 * [runGulp description]
-	 * @return [type] [description]
-	 */
-	private function runGulp()
-	{
-		$this->info( shell_exec( "gulp" ) );
+		$this->info('generating dependency config...');
+		$this->info( shell_exec( "php artisan ensphere:bower" ) );
 	}
 
 	/**

@@ -1,4 +1,4 @@
-<?php namespace Ensphere\Ensphere\Console\Commands\Ensphere\Assets;
+<?php namespace Ensphere\Ensphere\Console\Commands\Ensphere\Bower;
 
 use Illuminate\Console\Command as IlluminateCommand;
 use Symfony\Component\Console\Input\InputOption;
@@ -13,7 +13,7 @@ class Command extends IlluminateCommand {
 	 *
 	 * @var string
 	 */
-	protected $name = 'ensphere:assets';
+	protected $name = 'ensphere:bower';
 
 	/**
 	 * The console command description.
@@ -85,6 +85,7 @@ class Command extends IlluminateCommand {
 		$this->order();
 		// Generate the blade template
 		$this->generateTemplate();
+		$this->info('HTTP snippets generated!');
 	}
 
 	/**
@@ -141,15 +142,56 @@ class Command extends IlluminateCommand {
 	 */
 	private function generateTemplate() {
 		$js = $this->getJavascriptFiles();
+		$moduleJs = $this->getModuleJsFiles();
 		$tmpl  = '';
 		foreach( $js as $uri ) $tmpl .= "\t\t" . '<script type="text/javascript" src="' . $uri . '"></script>' . "\n";
+		foreach( $moduleJs as $uri ) $tmpl .= "\t\t" . '<script type="text/javascript" src="' . $uri . '"></script>' . "\n";
 		touch($this->writePath);
 		file_put_contents( $this->writePath . 'js-loader.blade.php', $tmpl );
+
 		$css = $this->getStyleFiles();
+		$moduleCss = $this->getModuleCssFiles();
 		$tmpl  = '';
 		foreach( $css as $uri ) $tmpl .= "\t\t" . '<link href="' . $uri . '" rel="stylesheet">' . "\n";
+		foreach( $moduleCss as $uri ) $tmpl .= "\t\t" . '<link href="' . $uri . '" rel="stylesheet">' . "\n";
 		touch($this->writePath);
 		file_put_contents( $this->writePath . 'css-loader.blade.php', $tmpl );
+	}
+
+	/**
+	 * [getModuleJsFiles description]
+	 * @return [type] [description]
+	 */
+	protected function getModuleJsFiles()
+	{
+		$files = array();
+		if( file_exists( public_path( 'package' ) ) ) {
+			$it = new RecursiveDirectoryIterator( public_path( 'package' ) );
+			foreach( new RecursiveIteratorIterator( $it ) as $file ) {
+				if( $file->getExtension() === 'js' ) {
+					$files[] = str_replace( public_path(), '', $file->getPathname() );
+				}
+			}
+		}
+		return $files;
+	}
+
+	/**
+	 * [getModuleCssFiles description]
+	 * @return [type] [description]
+	 */
+	protected function getModuleCssFiles()
+	{
+		$files = array();
+		if( file_exists( public_path( 'package' ) ) ) {
+			$it = new RecursiveDirectoryIterator( public_path( 'package' ) );
+			foreach( new RecursiveIteratorIterator( $it ) as $file ) {
+				if( $file->getExtension() === 'css' ) {
+					$files[] = str_replace( public_path(), '', $file->getPathname() );
+				}
+			}
+		}
+		return $files;
 	}
 
 	/**
