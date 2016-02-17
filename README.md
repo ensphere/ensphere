@@ -39,7 +39,7 @@ Create a default application or module by running
 ensphere baseapp
 ```
 
-This will run the standard `composer create` command anlong with some extra installation (I will also run npm comands so make sure node is installed on your machine https://nodejs.org/en/).
+This will run the standard `composer create` command along with some extra installation (It will also run npm commands so make sure node is installed on your machine https://nodejs.org/en/).
 
 Hopefully this has all installed correctly so cd into baseapp `cd baseapp` and start a server up.
 
@@ -49,7 +49,7 @@ artisan serve
 
 (if you already have the default port in operation use `artisan serve --port=8888`)
 
-Navigat to `http://localhost:8000/admin/login` in your browser and you should recive an error (404 Exception).
+Navigate to `http://localhost:8000/admin/login` in your browser and you should receive an error (404 Exception).
 
 Now back to terminal and create a new tab in terminal (command + t) and then require the authentication module.
 
