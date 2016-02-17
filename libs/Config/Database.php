@@ -13,7 +13,6 @@ class Database {
 		if ( env( 'APP_ENV' ) === 'local' ) {
 			$path = '/Applications/MAMP/tmp/mysql/mysql.sock';
 			$mampSocket = ( file_exists( $path ) ) ? $path : '';
-			
 			$array['unix_socket'] = env( 'DB_SOCKET', $mampSocket );
 		}
 		return $array;
