@@ -4,10 +4,14 @@ I've writen this to build a process for creating modular based applications. It 
 
 ## Test case preperation:
 
-Firstly make sure you have bower installed (run `bower` to check)
+Firstly make sure you have bower installed, run `bower` to check.
+
 ```
 npm install -g bower
 ```
+
+and also make sure node is installed (https://nodejs.org/en/), run `npm` in terminal to check.
+
 
 Create a local database called `l5` with credentials `root` `root` (make sure it's empty).
 
@@ -51,7 +55,7 @@ Create a default application or module by running
 ensphere baseapp
 ```
 
-This will run the standard `composer create` command along with some extra installation (It will also run npm commands so make sure node is installed on your machine https://nodejs.org/en/).
+This will run the standard `composer create` command along with some extra installation.
 
 Hopefully this has all installed correctly so cd into baseapp and start a server up:
 
