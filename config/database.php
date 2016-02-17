@@ -52,7 +52,7 @@ return [
 			'prefix'   => '',
 		],
 
-		'mysql' => [
+		'mysql' => \Libs\Config\Database::mySQLconnection([
 			'driver'    => 'mysql',
 			'host'      => env('DB_HOST', 'localhost'),
 			'database'  => env('DB_DATABASE', 'forge'),
@@ -62,7 +62,7 @@ return [
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',
 			'strict'    => false,
-		],
+		]),
 
 		'pgsql' => [
 			'driver'   => 'pgsql',
