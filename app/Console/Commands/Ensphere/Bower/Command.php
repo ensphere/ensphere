@@ -137,25 +137,51 @@ class Command extends IlluminateCommand {
 	}
 
 	/**
+	 * [assetLoaderTemplate description]
+	 * @param  [type] $jsFiles  [description]
+	 * @param  [type] $cssFiles [description]
+	 * @return [type]           [description]
+	 */
+	public static function assetLoaderTemplate( $jsFiles, $cssFiles ) {
+
+		$cssFileAsString = "'" . implode( "','", $cssFiles ) . "'";
+		$jsFilesAsString = "'" . implode( "','", $jsFiles ) . "'";
+
+		return "
+		<script>
+			var styles = [{$cssFileAsString}];
+			var scripts = [{$jsFilesAsString}];
+			var cb = function() {
+				window.loadStyles = function() {
+					var href = styles.shift(); var h = document.getElementsByTagName('head')[0]; var l = document.createElement('link');
+					l.rel = 'stylesheet'; l.href = href;l.onload = function(){if( styles.length !== 0 ){window.loadStyles();}};h.appendChild(l);
+				};
+				window.loadScripts = function( _callback ) {
+					var callback = _callback || function(){};
+					var src = scripts.shift(); var h = document.getElementsByTagName('head')[0]; var html = document.getElementsByTagName('html')[0]; var l = document.createElement('script');
+					l.rel = 'text/javascript'; l.src = src;
+					l.onload = function(){if( scripts.length !== 0 ) {window.loadScripts( _callback );} else {html.className += ' loaded';callback();}};h.appendChild(l);
+				};
+				window.loadStyles();
+				window.loadScripts(function(){ if( document.body ) $(document).trigger('ready'); if( document.readyState == 'complete' ) $(window).trigger('load'); });
+			};
+			var raf = requestAnimationFrame || mozRequestAnimationFrame || webkitRequestAnimationFrame || msRequestAnimationFrame;
+			if (raf) raf(cb);
+			else window.addEventListener('load', cb);
+		</script>
+		";
+
+	}
+
+	/**
 	 * [generateTemplate description]
 	 * @return [type] [description]
 	 */
-	private function generateTemplate() {
-		$js = $this->getJavascriptFiles();
-		$moduleJs = $this->getModuleJsFiles();
-		$tmpl  = '';
-		foreach( $js as $uri ) $tmpl .= "\t\t" . '<script type="text/javascript" src="' . $uri . '"></script>' . "\n";
-		foreach( $moduleJs as $uri ) $tmpl .= "\t\t" . '<script type="text/javascript" src="' . $uri . '"></script>' . "\n";
-		touch($this->writePath);
-		file_put_contents( $this->writePath . 'js-loader.blade.php', $tmpl );
-
-		$css = $this->getStyleFiles();
-		$moduleCss = $this->getModuleCssFiles();
-		$tmpl  = '';
-		foreach( $css as $uri ) $tmpl .= "\t\t" . '<link href="' . $uri . '" rel="stylesheet">' . "\n";
-		foreach( $moduleCss as $uri ) $tmpl .= "\t\t" . '<link href="' . $uri . '" rel="stylesheet">' . "\n";
-		touch($this->writePath);
-		file_put_contents( $this->writePath . 'css-loader.blade.php', $tmpl );
+	private function generateTemplate()
+	{
+		$js = $this->getJavascriptFiles() + $this->getModuleJsFiles();
+		$css = $this->getStyleFiles() + $this->getModuleCssFiles();
+		file_put_contents( $this->writePath . 'loader.blade.php', self::assetLoaderTemplate( $js, $css ) );
 	}
 
 	/**
