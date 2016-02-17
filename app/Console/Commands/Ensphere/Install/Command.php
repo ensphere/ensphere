@@ -90,7 +90,7 @@ class Command extends IlluminateCommand {
 	 */
 	private function combineVendorAssets()
 	{
-		$this->info( shell_exec( "php artisan ensphere:assets" ) );
+		$this->info( shell_exec( "php artisan ensphere:bower" ) );
 	}
 
 	/**
