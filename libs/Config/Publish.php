@@ -2,7 +2,7 @@
 
 use DirectoryIterator;
 
-class Generate {
+class Publish {
 
 	/**
 	 * [bower description]
