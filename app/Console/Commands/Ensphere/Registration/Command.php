@@ -98,7 +98,8 @@ class Command extends IlluminateCommand {
 			'aliases' => array(),
 			'middleware' => array(),
 			'routeMiddleware' => array(),
-			'middlewareGroups' => array()
+			'middlewareGroups' => array(),
+			'contracts' => array()
 		];
 		foreach( $configs as $config ) {
 			if( isset( $config['providers'] ) ) {
@@ -124,6 +125,9 @@ class Command extends IlluminateCommand {
 					}
 					$return['middlewareGroups'][$groupName] = $groupArray;
 				}
+			}
+			if( isset( $config['contracts'] ) ) {
+				$return['contracts'] = array_merge( $return['contracts'], (array)$config['contracts'] );
 			}
 		}
 		return $return;
