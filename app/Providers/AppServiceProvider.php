@@ -25,7 +25,7 @@ class AppServiceProvider extends ServiceProvider {
 		if( self::isModule() ) {
 			$this->publishes( \Libs\Config\Publish::bower([
 				__DIR__ . '/../../public/package/ensphere/ensphere/' => base_path( 'public/package/ensphere/ensphere/' )
-			]), __DIR__ );
+			], __DIR__ ));
 		}
 	}
 
