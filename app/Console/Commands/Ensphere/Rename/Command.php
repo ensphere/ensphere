@@ -187,52 +187,6 @@ class Command extends IlluminateCommand {
 	}
 
 	/**
-	 * [copyOrRename description]
-	 * @param  [type] $pathPrefix [description]
-	 * @return [type]             [description]
-	 */
-	private function copyOrRename( $pathPrefix )
-	{
-		if( $this->currentVendor !== $this->vendor ) {
-			$newDir = base_path( "{$pathPrefix}/{$this->vendor}" );
-			if( ! file_exists( $newDir ) ) mkdir( $newDir, 0755 );
-			$this->copy(
-				base_path( "{$pathPrefix}/{$this->currentVendor}/{$this->currentModule}" ),
-				base_path("{$pathPrefix}/{$this->vendor}/{$this->module}")
-			);
-		} else {
-			rename( base_path( "{$pathPrefix}/{$this->currentVendor}/{$this->currentModule}" ), base_path("{$pathPrefix}/{$this->currentVendor}/{$this->module}" ) );
-			rename( base_path( "{$pathPrefix}/{$this->currentVendor}"), base_path("{$pathPrefix}/{$this->vendor}" ) );
-		}
-	}
-
-	/**
-	 * [copy description]
-	 * @param  [type] $source      [description]
-	 * @param  [type] $destination [description]
-	 * @return [type]              [description]
-	 */
-	private function copy( $source, $destination )
-	{
-		$source = rtrim( $source, '/' ) . '/';
-		$destination = rtrim( $destination, '/' ) . '/';
-		// Get array of all source files
-	    $files = scandir( $source );
-	    // Cycle through all source files
-	    foreach ( $files as $file ) {
-	        if ( in_array( $file, array( ".", ".." ) ) ) continue;
-	        // If we copied this successfully, mark it for deletion
-	        if ( copy( $source . $file, $destination . $file ) ) {
-	            $delete[] = $source.$file;
-	        }
-	    }
-	    // Delete all successfully-copied files
-	    foreach ( $delete as $file ) {
-	        unlink( $file );
-	    }
-	}
-
-	/**
 	 * [updatePackagesFile description]
 	 * @return [type] [description]
 	 */
@@ -279,6 +233,88 @@ class Command extends IlluminateCommand {
 		$contents = file_get_contents( $file );
 		$newContents = str_replace( "public/package/{$this->currentVendor}/{$this->currentModule}/", "public/package/{$this->vendor}/{$this->module}/", $contents );
 		file_put_contents( $file, $newContents );
+	}
+
+	private function deleteDirectory($dir) {
+	    if ( ! file_exists( $dir ) ) return true;
+	    if ( ! is_dir( $dir ) ) return unlink( $dir );
+	    foreach ( scandir( $dir ) as $item ) {
+	        if ( $item == '.' || $item == '..' ) continue;
+	        if ( ! $this->deleteDirectory($dir . DIRECTORY_SEPARATOR . $item ) ) return false;
+	    }
+	    return rmdir( $dir );
+	}
+
+	/**
+	 * [copyOrRename description]
+	 * @param  [type] $pathPrefix [description]
+	 * @return [type]             [description]
+	 */
+	public function copyOrRename( $pathPrefix )
+	{
+		if( $this->currentVendor !== $this->vendor ) {
+			$newDir = base_path( "{$pathPrefix}/{$this->vendor}" );
+			if( ! file_exists( $newDir ) ) mkdir( $newDir, 0755 );
+			$this->copy(
+				base_path( "{$pathPrefix}/{$this->currentVendor}/{$this->currentModule}" ),
+				base_path("{$pathPrefix}/{$this->vendor}/{$this->module}")
+			);
+		} else {
+			rename( base_path( "{$pathPrefix}/{$this->currentVendor}/{$this->currentModule}" ), base_path("{$pathPrefix}/{$this->currentVendor}/{$this->module}" ) );
+			rename( base_path( "{$pathPrefix}/{$this->currentVendor}"), base_path("{$pathPrefix}/{$this->vendor}" ) );
+		}
+    	$this->deleteDirectory( base_path( "{$pathPrefix}/{$this->currentVendor}/{$this->currentModule}" ) );
+    	if( !(new \FilesystemIterator( base_path( "{$pathPrefix}/{$this->currentVendor}" ) ) )->valid() ) {
+    		rmdir( base_path( "{$pathPrefix}/{$this->currentVendor}" ) );
+    	}
+	}
+
+	/**
+	 * [findAllFiles description]
+	 * @param  [type] $dir [description]
+	 * @return [type]      [description]
+	 */
+	private function findAllFiles( $dir )
+	{
+		$dir = rtrim( $dir, '/' );
+	    $root = scandir($dir);
+	    foreach($root as $value)
+	    {
+	        if($value === '.' || $value === '..') {continue;}
+	        if(is_file("$dir/$value")) {$result[]="$dir/$value";continue;}
+	        foreach($this->findAllFiles("$dir/$value") as $value)
+	        {
+	            $result[]=$value;
+	        }
+	    }
+	    return $result;
+	}
+
+	/**
+	 * [copy description]
+	 * @param  [type] $source      [description]
+	 * @param  [type] $destination [description]
+	 * @return [type]              [description]
+	 */
+	private function copy( $source, $destination )
+	{
+		$delete = [];
+		$source = rtrim( $source, '/' ) . '/';
+		$destination = rtrim( $destination, '/' ) . '/';
+	    $files = $this->findAllFiles( $source );
+	    foreach ( $files as $file ) {
+	        if ( in_array( $file, array( ".", ".." ) ) ) continue;
+	        $file = str_replace( $source, '', $file );
+	        if( ! file_exists( $destination . dirname( $file ) ) ) {
+				mkdir( $destination . dirname( $file ), 0755, true);
+			}
+	        if ( @copy( $source . $file, $destination . $file ) ) {
+	            $delete[] = $source . $file;
+	        }
+	    }
+	    foreach ( $delete as $file ) {
+	        unlink( $file );
+	    }
 	}
 
 }
