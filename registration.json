@@ -27,6 +27,6 @@
 
 	},
 	"contracts" : {
-		"Illuminate\\Contracts\\Auth\\Registrar" : "Ensphere\\Ensphere\\Services\\Registrar"
+
 	}
 }
