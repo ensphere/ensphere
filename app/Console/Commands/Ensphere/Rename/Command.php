@@ -97,7 +97,7 @@ class Command extends IlluminateCommand {
 		$this->module = $this->ask('Whats your Module name?');
 		$this->camelCasedModule = ucfirst( camel_case( $this->module ) );
 		if( $this->isOkToRun() ) {
-			//$this->laravelRename();
+			$this->laravelRename();
 			$this->moduleRename();
 			$this->dumpAutoload();
 			$this->info("done!");
