@@ -97,7 +97,7 @@ class Command extends IlluminateCommand {
 		$this->module = $this->ask('Whats your Module name?');
 		$this->camelCasedModule = ucfirst( camel_case( $this->module ) );
 		if( $this->isOkToRun() ) {
-			$this->laravelRename();
+			//$this->laravelRename();
 			$this->moduleRename();
 			$this->dumpAutoload();
 			$this->info("done!");
@@ -119,7 +119,8 @@ class Command extends IlluminateCommand {
 	 * [dumpAutoload description]
 	 * @return [type] [description]
 	 */
-	private function dumpAutoload() {
+	private function dumpAutoload()
+	{
 		$localComposerFile = base_path('composer.phar');
 		if( file_exists( $localComposerFile ) ) {
 			echo shell_exec("php {$localComposerFile} dump-autoload");
@@ -133,7 +134,8 @@ class Command extends IlluminateCommand {
 	 * [laravelRename description]
 	 * @return [type] [description]
 	 */
-	private function laravelRename() {
+	private function laravelRename()
+	{
 		$this->call( "app:name",  ["name" => "{$this->camelCasedVendor}\\{$this->camelCasedModule}"]);
 	}
 
@@ -141,10 +143,12 @@ class Command extends IlluminateCommand {
 	 * [moduleRename description]
 	 * @return [type] [description]
 	 */
-	private function moduleRename() {
+	private function moduleRename()
+	{
 		$this->renamePublicFolders();
 		$this->renameDatabaseFolders();
 		$this->updateRegistrationFile();
+		$this->updateReferences();
 		$this->updateGulpFile();
 		$this->updateComposerFile();
 		$this->updatePackagesFile();
@@ -154,9 +158,23 @@ class Command extends IlluminateCommand {
 	 * [renameDatabaseFolders description]
 	 * @return [type] [description]
 	 */
-	private function renameDatabaseFolders() {
+	private function renameDatabaseFolders()
+	{
 		$this->renameMigrationFolders();
 		$this->renameSeedsFolders();
+	}
+
+	/**
+	 * [updateReferences description]
+	 * @return [type] [description]
+	 */
+	private function updateReferences()
+	{
+		$files = $this->findAllFiles( app_path() );
+		foreach( $files as $file ) {
+			$contents = preg_replace( "/([\/']){$this->currentVendor}([\/\.]){$this->currentModule}([\/'])/", "$1{$this->vendor}$2{$this->module}$3", file_get_contents( $file ) );
+			file_put_contents( $file, $contents );
+		}
 	}
 
 	/**
@@ -235,6 +253,11 @@ class Command extends IlluminateCommand {
 		file_put_contents( $file, $newContents );
 	}
 
+	/**
+	 * [deleteDirectory description]
+	 * @param  [type] $dir [description]
+	 * @return [type]      [description]
+	 */
 	private function deleteDirectory($dir) {
 	    if ( ! file_exists( $dir ) ) return true;
 	    if ( ! is_dir( $dir ) ) return unlink( $dir );
@@ -277,14 +300,15 @@ class Command extends IlluminateCommand {
 	private function findAllFiles( $dir )
 	{
 		$dir = rtrim( $dir, '/' );
-	    $root = scandir($dir);
-	    foreach($root as $value)
-	    {
-	        if($value === '.' || $value === '..') {continue;}
-	        if(is_file("$dir/$value")) {$result[]="$dir/$value";continue;}
-	        foreach($this->findAllFiles("$dir/$value") as $value)
-	        {
-	            $result[]=$value;
+	    $root = scandir( $dir );
+	    foreach( $root as $value ) {
+	        if( $value === '.' || $value === '..' ) continue;
+	        if( is_file( "{$dir}/{$value}" ) ) {
+	        	$result[] = "{$dir}/{$value}";
+	        	continue;
+	        }
+	        foreach( $this->findAllFiles( "{$dir}/{$value}" ) as $value ) {
+	            $result[] = $value;
 	        }
 	    }
 	    return $result;
