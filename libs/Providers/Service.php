@@ -17,7 +17,7 @@ class Service {
 				$packageContracts = (array)$data->contracts;
 			}
 		}
-		return array_merge( $contracts, $packageContracts );
+		return array_merge( $packageContracts, $contracts );
 	}
 
 }
