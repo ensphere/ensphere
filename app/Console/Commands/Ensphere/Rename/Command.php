@@ -170,9 +170,16 @@ class Command extends IlluminateCommand {
 	 */
 	private function updateReferences()
 	{
+		// Application files
 		$files = $this->findAllFiles( app_path() );
 		foreach( $files as $file ) {
-			$contents = preg_replace( "/([\/']){$this->currentVendor}([\/\.]){$this->currentModule}([\/'])/", "$1{$this->vendor}$2{$this->module}$3", file_get_contents( $file ) );
+			$contents = preg_replace( "/([\/']){$this->currentVendor}([\/\.]){$this->currentModule}([\/']|(?:::))/", "$1{$this->vendor}$2{$this->module}$3", file_get_contents( $file ) );
+			file_put_contents( $file, $contents );
+		}
+		// Resource views
+		$files = $this->findAllFiles( base_path('resources/views') );
+		foreach( $files as $file ) {
+			$contents = preg_replace( "/([\/']){$this->currentVendor}([\/\.]){$this->currentModule}([\/']|(?:::))/", "$1{$this->vendor}$2{$this->module}$3", file_get_contents( $file ) );
 			file_put_contents( $file, $contents );
 		}
 	}
@@ -208,7 +215,8 @@ class Command extends IlluminateCommand {
 	 * [updatePackagesFile description]
 	 * @return [type] [description]
 	 */
-	private function updatePackagesFile() {
+	private function updatePackagesFile()
+	{
 		$file = base_path('config/packages.json');
 		if( ! file_exists( $file ) ) return;
 		$contents = file_get_contents( $file );
@@ -220,7 +228,8 @@ class Command extends IlluminateCommand {
 	 * [updateComposerFile description]
 	 * @return [type] [description]
 	 */
-	private function updateComposerFile() {
+	private function updateComposerFile()
+	{
 		$file = base_path('composer.json');
 		if( ! file_exists( $file ) ) return;
 		$contents = file_get_contents( $file );
@@ -233,7 +242,8 @@ class Command extends IlluminateCommand {
 	 * [updateRegistrationFile description]
 	 * @return [type] [description]
 	 */
-	private function updateRegistrationFile() {
+	private function updateRegistrationFile()
+	{
 		$file = base_path('registration.json');
 		if( ! file_exists( $file ) ) return;
 		$contents = file_get_contents( $file );
@@ -245,7 +255,8 @@ class Command extends IlluminateCommand {
 	 * [updateGulpFile description]
 	 * @return [type] [description]
 	 */
-	private function updateGulpFile() {
+	private function updateGulpFile()
+	{
 		$file = base_path('gulpfile.js');
 		if( ! file_exists( $file ) ) return;
 		$contents = file_get_contents( $file );
@@ -258,7 +269,8 @@ class Command extends IlluminateCommand {
 	 * @param  [type] $dir [description]
 	 * @return [type]      [description]
 	 */
-	private function deleteDirectory($dir) {
+	private function deleteDirectory($dir)
+	{
 	    if ( ! file_exists( $dir ) ) return true;
 	    if ( ! is_dir( $dir ) ) return unlink( $dir );
 	    foreach ( scandir( $dir ) as $item ) {
