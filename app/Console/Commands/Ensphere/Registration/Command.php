@@ -130,6 +130,16 @@ class Command extends IlluminateCommand {
 				$return['contracts'] = array_merge( $return['contracts'], (array)$config['contracts'] );
 			}
 		}
+		$return['providers'] = array_unique( $return['providers'] );
+		$return['aliases'] = array_unique( $return['aliases'] );
+		$return['middleware'] = array_unique( $return['middleware'] );
+		$return['routeMiddleware'] = array_unique( $return['routeMiddleware'] );
+		$return['contracts'] = array_unique( $return['contracts'] );
+		foreach( $return['middlewareGroups'] as $key => $val ) {
+			if( is_array( $val ) ) {
+				$return['middlewareGroups'][$key] = array_unique( $val );
+			}
+		}
 		return $return;
 	}
 
