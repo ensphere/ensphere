@@ -1,6 +1,6 @@
 <?php
 
-namespace Ensphere\Authentication\Http\Controllers;
+namespace Ensphere\Ensphere\Http\Controllers;
 
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
