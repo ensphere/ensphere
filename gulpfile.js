@@ -13,12 +13,7 @@ var elixir = require('laravel-elixir');
 
 elixir(function(mix) {
     mix
-    // Module Based Assets
     .sass("ensphere.scss", "public/package/ensphere/ensphere/css")
     .copy("resources/assets/images/", "public/package/ensphere/ensphere/images/")
-	.copy("resources/assets/js/", "public/package/ensphere/ensphere/js/")
-
-	// Dependencies
-	.copy("bower_components/semantic-ui", "public/vendor/semantic-ui")
-	.copy("bower_components/jquery", "public/vendor/jquery");
+	.copy("resources/assets/js/", "public/package/ensphere/ensphere/js/");
 });
