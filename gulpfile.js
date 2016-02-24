@@ -11,9 +11,9 @@ var elixir = require('laravel-elixir');
  |
  */
 
-elixir(function(mix) {
+elixir( function( mix ) {
     mix
-    .sass("ensphere.scss", "public/package/ensphere/ensphere/css")
-    .copy("resources/assets/images/", "public/package/ensphere/ensphere/images/")
-	.copy("resources/assets/js/", "public/package/ensphere/ensphere/js/");
+    .sass( ["main.scss"], "public/package/ensphere/ensphere/css" )
+    .scripts( ["main.js"], "public/package/ensphere/ensphere/js" )
+    .copy( "resources/assets/images/", "public/package/ensphere/ensphere/images/" );
 });
