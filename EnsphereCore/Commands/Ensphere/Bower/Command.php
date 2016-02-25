@@ -1,4 +1,4 @@
-<?php namespace Ensphere\Ensphere\Console\Commands\Ensphere\Bower;
+<?php namespace EnsphereCore\Commands\Ensphere\Bower;
 
 use Illuminate\Console\Command as IlluminateCommand;
 use Symfony\Component\Console\Input\InputOption;
@@ -70,14 +70,12 @@ class Command extends IlluminateCommand {
 	 */
 	public function fire()
 	{
-		if( file_exists( public_path( 'package' ) ) ) {
-			$it = new RecursiveDirectoryIterator( public_path( 'package' ) );
-			foreach( new RecursiveIteratorIterator( $it ) as $file ) {
-				if( $file->getFilename() === 'assets.json' ) {
-					$packages = $this->getPackages( $file->getPath() );
-					foreach( $packages as $name => $packageData ) {
-						$this->bowers[] = new Bower( $name, $packageData );
-					}
+		$it = new RecursiveDirectoryIterator( base_path() );
+		foreach( new RecursiveIteratorIterator( $it ) as $file ) {
+			if( $file->getFilename() === 'ensphere-assets.json' ) {
+				$packages = $this->getPackages( $file->getPath() );
+				foreach( $packages as $name => $packageData ) {
+					$this->bowers[] = new Bower( $name, $packageData );
 				}
 			}
 		}
@@ -94,7 +92,7 @@ class Command extends IlluminateCommand {
 	 * @return [type]       [description]
 	 */
 	private function getPackages( $path ) {
-		return json_decode( file_get_contents( $path . '/assets.json' ) );
+		return json_decode( file_get_contents( $path . '/ensphere-assets.json' ) );
 	}
 
 	/**

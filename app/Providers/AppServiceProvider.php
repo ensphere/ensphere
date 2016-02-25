@@ -1,17 +1,11 @@
 <?php namespace Ensphere\Ensphere\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Libs\Helper;
+use EnsphereCore\Libs\Config\Publish;
+use EnsphereCore\Libs\Providers\Service;
 
-class AppServiceProvider extends ServiceProvider {
-
-	/**
-	 * [isModule description]
-	 * @return boolean [description]
-	 */
-	public static function isModule() {
-		return file_exists( __DIR__ . "/../../../../../vendor" );
-	}
+class AppServiceProvider extends ServiceProvider
+{
 
 
 	/**
@@ -22,8 +16,8 @@ class AppServiceProvider extends ServiceProvider {
 	public function boot()
 	{
 		$this->loadViewsFrom( __DIR__ . '/../../resources/views', 'ensphere.ensphere' );
-		if( self::isModule() ) {
-			$this->publishes( \Libs\Config\Publish::bower([
+		if( is_module( __DIR__ ) ) {
+			$this->publishes( Publish::bower([
 				__DIR__ . '/../../public/package/ensphere/ensphere/' => base_path( 'public/package/ensphere/ensphere/' )
 			], __DIR__ ));
 		}
@@ -35,9 +29,10 @@ class AppServiceProvider extends ServiceProvider {
 	 */
 	public function register()
 	{
-		if( ! self::isModule() ) {
-			$contracts = \Libs\Providers\Service::contracts([
-				// THESE ARE APPLICATION CONTRACTS.
+		if( ! is_module( __DIR__ ) ) {
+			$contracts = Service::contracts([
+
+				/** THESE ARE APPLICATION CONTRACTS. */
 
 			]);
 			foreach( $contracts as $blueprint => $contract ) {

@@ -1,4 +1,4 @@
-<?php namespace Ensphere\Ensphere\Console\Commands\Ensphere\Registration;
+<?php namespace EnsphereCore\Commands\Ensphere\Registration;
 
 use Illuminate\Console\Command as IlluminateCommand;
 use Symfony\Component\Console\Input\InputOption;
@@ -57,13 +57,13 @@ class Command extends IlluminateCommand {
 	 */
 	protected function getPendingPackageDirs() {
 		$files = [];
-		$moduleRegistrationFilePath = base_path( 'registration.json' );
+		$moduleRegistrationFilePath = base_path( 'EnsphereCore/ensphere-registration.json' );
 		if( file_exists( $moduleRegistrationFilePath ) ) {
-			$files[] = base_path();
+			$files[] = base_path('EnsphereCore');
 		}
 		$it = new RecursiveDirectoryIterator( base_path( 'vendor' ) );
 		foreach( new RecursiveIteratorIterator( $it ) as $file ) {
-			if( $file->getFilename() == 'registration.json' ) {
+			if( $file->getFilename() == 'ensphere-registration.json' ) {
 				$files[] = $file->getPath();
 			}
 		}
@@ -78,9 +78,9 @@ class Command extends IlluminateCommand {
 	protected function getRegistrationData( $paths ) {
 		$config = [];
 		foreach( $paths as $path ) {
-			$data = json_decode( file_get_contents( $path . '/registration.json' ) );
+			$data = json_decode( file_get_contents( $path . '/ensphere-registration.json' ) );
 			if( ! is_object( $data ) ) {
-				return $this->error('incorrect json format: ' . $path . '/registration.json');
+				return $this->error('incorrect json format: ' . $path . '/ensphere-registration.json');
 			}
 			$config[] = (array)$data;
 		}

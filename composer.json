@@ -14,12 +14,15 @@
 		"phpspec/phpspec": "~2.1"
 	},
 	"autoload": {
+		"file": [
+			"EnsphereCore/helpers.php"
+		],
 		"classmap": [
 			"database"
 		],
 		"psr-4": {
 			"Ensphere\\Ensphere\\": "app/",
-			"Libs\\": "libs/"
+			"EnsphereCore\\": "EnsphereCore/"
 		}
 	},
 	"autoload-dev": {

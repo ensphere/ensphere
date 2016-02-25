@@ -120,7 +120,7 @@ return [
 	|
 	*/
 
-	'providers' => Libs\Config\Generate::providers([
+	'providers' => EnsphereCore\Libs\Config\Generate::providers([
 
 		Illuminate\Auth\AuthServiceProvider::class,
         Illuminate\Broadcasting\BroadcastServiceProvider::class,
@@ -167,7 +167,7 @@ return [
 	|
 	*/
 
-	'aliases' => Libs\Config\Generate::aliases([
+	'aliases' => EnsphereCore\Libs\Config\Generate::aliases([
 
 		'App'       => Illuminate\Support\Facades\App::class,
         'Artisan'   => Illuminate\Support\Facades\Artisan::class,

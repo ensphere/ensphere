@@ -1,6 +1,6 @@
-<?php namespace Ensphere\Ensphere\Console\Commands\Ensphere\Install\Update;
+<?php namespace EnsphereCore\Commands\Ensphere\Install\Update;
 
-use Ensphere\Ensphere\Console\Commands\Ensphere\Traits\Module as ModuleTrait;
+use EnsphereCore\Commands\Ensphere\Traits\Module as ModuleTrait;
 use Illuminate\Console\Command as IlluminateCommand;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;

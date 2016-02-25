@@ -12,14 +12,14 @@ class Kernel extends ConsoleKernel {
 	 */
 	protected $commands = [
 
-		'Ensphere\Ensphere\Console\Commands\Ensphere\Rename\Command',
-		'Ensphere\Ensphere\Console\Commands\Ensphere\Export\Command',
-		'Ensphere\Ensphere\Console\Commands\Ensphere\Import\Command',
-		'Ensphere\Ensphere\Console\Commands\Ensphere\Bower\Command',
-		'Ensphere\Ensphere\Console\Commands\Ensphere\Migrate\Command',
-		'Ensphere\Ensphere\Console\Commands\Ensphere\Registration\Command',
-		'Ensphere\Ensphere\Console\Commands\Ensphere\Install\Command',
-		'Ensphere\Ensphere\Console\Commands\Ensphere\Install\Update\Command',
+		'EnsphereCore\Commands\Ensphere\Rename\Command',
+		'EnsphereCore\Commands\Ensphere\Export\Command',
+		'EnsphereCore\Commands\Ensphere\Import\Command',
+		'EnsphereCore\Commands\Ensphere\Bower\Command',
+		'EnsphereCore\Commands\Ensphere\Migrate\Command',
+		'EnsphereCore\Commands\Ensphere\Registration\Command',
+		'EnsphereCore\Commands\Ensphere\Install\Command',
+		'EnsphereCore\Commands\Ensphere\Install\Update\Command',
 
 	];
 

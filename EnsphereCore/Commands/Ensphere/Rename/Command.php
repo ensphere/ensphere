@@ -1,6 +1,6 @@
-<?php namespace Ensphere\Ensphere\Console\Commands\Ensphere\Rename;
+<?php namespace EnsphereCore\Commands\Ensphere\Rename;
 
-use Ensphere\Ensphere\Console\Commands\Ensphere\Traits\Module as ModuleTrait;
+use EnsphereCore\Commands\Ensphere\Traits\Module as ModuleTrait;
 use Illuminate\Console\Command as IlluminateCommand;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
@@ -244,7 +244,7 @@ class Command extends IlluminateCommand {
 	 */
 	private function updateRegistrationFile()
 	{
-		$file = base_path('registration.json');
+		$file = base_path('EnsphereCore/registration.json');
 		if( ! file_exists( $file ) ) return;
 		$contents = file_get_contents( $file );
 		$newContents = str_replace( "{$this->currentCamelCasedVendor}\\\\{$this->currentCamelCasedModule}", "{$this->camelCasedVendor}\\\\{$this->camelCasedModule}", $contents );

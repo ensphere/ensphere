@@ -1,4 +1,4 @@
-<?php namespace Libs\Providers;
+<?php namespace EnsphereCore\Libs\Providers;
 
 class Service {
 

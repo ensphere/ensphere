@@ -1,4 +1,4 @@
-<?php namespace Ensphere\Ensphere\Console\Commands\Ensphere\Bower;
+<?php namespace EnsphereCore\Commands\Ensphere\Bower;
 
 class Bower {
 

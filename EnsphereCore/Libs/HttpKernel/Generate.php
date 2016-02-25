@@ -1,4 +1,4 @@
-<?php namespace Libs\HttpKernel;
+<?php namespace EnsphereCore\Libs\HttpKernel;
 
 class Generate {
 

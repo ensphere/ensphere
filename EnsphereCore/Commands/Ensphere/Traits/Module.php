@@ -1,4 +1,4 @@
-<?php namespace Ensphere\Ensphere\Console\Commands\Ensphere\Traits;
+<?php namespace EnsphereCore\Commands\Ensphere\Traits;
 
 trait Module {
 
