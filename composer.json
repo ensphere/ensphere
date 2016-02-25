@@ -14,9 +14,6 @@
 		"phpspec/phpspec": "~2.1"
 	},
 	"autoload": {
-		"file": [
-			"EnsphereCore/helpers.php"
-		],
 		"classmap": [
 			"database"
 		],

@@ -7,6 +7,14 @@ use EnsphereCore\Libs\Providers\Service;
 class AppServiceProvider extends ServiceProvider
 {
 
+	/**
+	 * [isModule description]
+	 * @return boolean [description]
+	 */
+	private function isModule()
+	{
+		return file_exists( __DIR__ . "/../../../../../vendor" );
+	}
 
 	/**
 	 * Bootstrap any application services.
@@ -16,7 +24,7 @@ class AppServiceProvider extends ServiceProvider
 	public function boot()
 	{
 		$this->loadViewsFrom( __DIR__ . '/../../resources/views', 'ensphere.ensphere' );
-		if( is_module( __DIR__ ) ) {
+		if( $this->isModule() ) {
 			$this->publishes( Publish::bower([
 				__DIR__ . '/../../public/package/ensphere/ensphere/' => base_path( 'public/package/ensphere/ensphere/' )
 			], __DIR__ ));
@@ -29,7 +37,7 @@ class AppServiceProvider extends ServiceProvider
 	 */
 	public function register()
 	{
-		if( ! is_module( __DIR__ ) ) {
+		if( ! $this->isModule() ) {
 			$contracts = Service::contracts([
 
 				/** THESE ARE APPLICATION CONTRACTS. */
