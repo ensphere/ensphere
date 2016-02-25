@@ -4,6 +4,12 @@
 	"keywords": ["framework"],
 	"license": "MIT",
 	"type": "project",
+	"repositories": [
+        {
+            "type": "composer",
+            "url": "http://modules.testing.pm"
+        }
+    ],
 	"require": {
 		"laravel/framework": "5.2.*",
 		"illuminate/html": "5.*",
