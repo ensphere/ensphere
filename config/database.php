@@ -52,7 +52,7 @@ return [
 			'prefix'   => '',
 		],
 
-		'mysql' => \Libs\Config\Database::mySQLconnection([
+		'mysql' => \EnsphereCore\Libs\Config\Database::mySQLconnection([
 			'driver'    => 'mysql',
 			'host'      => env('DB_HOST', 'localhost'),
 			'database'  => env('DB_DATABASE', 'forge'),
