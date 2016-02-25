@@ -244,7 +244,7 @@ class Command extends IlluminateCommand {
 	 */
 	private function updateRegistrationFile()
 	{
-		$file = base_path('EnsphereCore/registration.json');
+		$file = base_path('EnsphereCore/ensphere-registration.json');
 		if( ! file_exists( $file ) ) return;
 		$contents = file_get_contents( $file );
 		$newContents = str_replace( "{$this->currentCamelCasedVendor}\\\\{$this->currentCamelCasedModule}", "{$this->camelCasedVendor}\\\\{$this->camelCasedModule}", $contents );
