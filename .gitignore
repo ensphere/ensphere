@@ -4,3 +4,8 @@
 /config/packages.json
 config/packages.json
 composer.lock
+
+/database/migrations/*
+/database/seeds/*
+!/database/migrations/ensphere/ensphere/*
+!/database/seeds/ensphere/ensphere/*
