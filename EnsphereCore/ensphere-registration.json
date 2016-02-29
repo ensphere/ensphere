@@ -21,11 +21,13 @@
 		"Ensphere\\Ensphere\\Providers\\AppServiceProvider",
 		"Ensphere\\Ensphere\\Providers\\ConfigServiceProvider",
 		"Ensphere\\Ensphere\\Providers\\EventServiceProvider",
-		"Ensphere\\Ensphere\\Providers\\RouteServiceProvider"
+		"Ensphere\\Ensphere\\Providers\\RouteServiceProvider",
+		"Collective\\Html\\HtmlServiceProvider"
 	],
 	"aliases" : {
-
-	},
+        "Form" : "Collective\\Html\\FormFacade",
+        "HTML" : "Collective\\Html\\HtmlFacade"
+    },
 	"contracts" : {
 
 	}

@@ -6,7 +6,7 @@
 	"type": "project",
 	"require": {
 		"laravel/framework": "5.2.*",
-		"illuminate/html": "5.*",
+		"laravelcollective/html": "v5.2.4",
 		"filp/whoops": "~1.0"
 	},
 	"require-dev": {
