@@ -52,7 +52,13 @@ class Generate {
 				$packageMiddlewareGroups = (array)$data->middlewareGroups;
 			}
 		}
-		return ( $packageMiddlewareGroups + $middlewareGroups );
+		foreach( $packageMiddlewareGroups as $groupName => $middlewareArray ) {
+			if( ! isset( $middlewareGroups[$groupName] ) ) {
+				$middlewareGroups[$groupName] = [];
+			}
+			$middlewareGroups[$groupName] = array_unique( array_merge( $middlewareGroups[$groupName], $middlewareArray ) );
+		}
+		return $middlewareGroups;
 	}
 
 }
