@@ -34,7 +34,14 @@ class Kernel extends HttpKernel {
 	 * @var [type]
 	 */
 	protected $middlewareGroups = [
-
+		'web' => [
+			"Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse",
+            "Illuminate\Session\Middleware\StartSession",
+            "Illuminate\View\Middleware\ShareErrorsFromSession",
+		],
+		"api" : [
+			"throttle:60,1"
+		]
     ];
 
 	/**
@@ -49,6 +56,8 @@ class Kernel extends HttpKernel {
 		$this->middleware = Generate::middleware( [
 
 			/** Application middleware */
+
+			"Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode"
 
 		], $this->middleware );
 
