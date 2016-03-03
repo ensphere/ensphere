@@ -38,6 +38,8 @@ class Kernel extends HttpKernel {
 			"Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse",
             "Illuminate\Session\Middleware\StartSession",
             "Illuminate\View\Middleware\ShareErrorsFromSession",
+            "Ensphere\Ensphere\Http\Middleware\EncryptCookies",
+            "Ensphere\Ensphere\Http\Middleware\VerifyCsrfToken"
 		],
 		"api" => [
 			"throttle:60,1"

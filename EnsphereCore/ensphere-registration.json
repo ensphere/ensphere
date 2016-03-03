@@ -6,10 +6,7 @@
 
 	},
 	"middlewareGroups" : {
-		"web" : [
-			"\\Ensphere\\Ensphere\\Http\\Middleware\\EncryptCookies",
-            "\\Ensphere\\Ensphere\\Http\\Middleware\\VerifyCsrfToken"
-		]
+
 	},
 	"providers" : [
 		"Ensphere\\Ensphere\\Providers\\AppServiceProvider",
