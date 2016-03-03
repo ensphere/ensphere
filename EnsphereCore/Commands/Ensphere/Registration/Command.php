@@ -123,7 +123,7 @@ class Command extends IlluminateCommand {
 					if( ! isset( $return['middlewareGroups'][$groupName] ) ) {
 						$return['middlewareGroups'][$groupName] = array();
 					}
-					$return['middlewareGroups'][$groupName] = $groupArray;
+					$return['middlewareGroups'][$groupName] = array_merge( $return['middlewareGroups'][$groupName], $groupArray );
 				}
 			}
 			if( isset( $config['contracts'] ) ) {
