@@ -1,0 +1,27 @@
+<?php namespace {{NAMESPACE}}\Contracts;
+
+use {{NAMESPACE}}\Contracts\Blueprints\{{NAME}} as Blueprint;
+use {{NAMESPACE}}\Models\{{SINGLE}};
+
+class {{NAME}} extends Contract implements Blueprint {
+
+	/**
+	 * [__construct description]
+	 * @param {{NAME}} $model [description]
+	 */
+	public function __construct( {{SINGLE}} $model )
+	{
+		$this->model = $model;
+	}
+
+	/**
+	 * [index description]
+	 * @param  [type] $controller [description]
+	 * @return [type]             [description]
+	 */
+	public function index( $controller )
+	{
+
+	}
+
+}

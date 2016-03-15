@@ -9,6 +9,7 @@ use RecursiveIteratorIterator;
 use FilesystemIterator;
 use DirectoryIterator;
 use Artisan;
+use Session;
 
 class Command extends IlluminateCommand {
 
@@ -84,6 +85,20 @@ class Command extends IlluminateCommand {
 					}
 				}
 			}
+		}
+		$this->seed();
+	}
+
+	/**
+	 * [seed description]
+	 * @return [type] [description]
+	 */
+	protected function seed()
+	{
+		$seeds = Session::get( 'seed' );
+		foreach( $seeds as $seed ) {
+			$this->info( "seeding {$seed}...");
+			(new $seed)->run();
 		}
 	}
 

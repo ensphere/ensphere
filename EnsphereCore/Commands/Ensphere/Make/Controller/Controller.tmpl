@@ -1,0 +1,38 @@
+<?php namespace {{NAMESPACE}}\Http\Controllers;
+
+use {{NAMESPACE}}\Contracts\Blueprints\{{NAME}} as Blueprint;
+use Illuminate\Foundation\Application;
+use Ensphere\Authentication\Http\Controllers\DashboardController;
+
+class {{NAME}}Controller extends DashboardController
+{
+
+	/**
+	 * [$contract description]
+	 * @var [type]
+	 */
+	protected $contract;
+
+    /**
+     * [__construct description]
+     * @param Blueprint $contract [description]
+     */
+	public function __construct( Blueprint $contract, Application $app )
+	{
+		$this->middleware( 'auth' );
+		$this->middleware( 'permission' );
+		$this->repo = $contract;
+		$this->container = $app['ensphere.container'];
+        $this->render();
+	}
+
+	/**
+	 * [index description]
+	 * @return [type] [description]
+	 */
+	public function index()
+	{
+		if( ! is_null( $return = $this->repo->index( $this ) ) ) return $return;
+	}
+
+}
