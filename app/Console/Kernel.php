@@ -22,6 +22,7 @@ class Kernel extends ConsoleKernel {
 		'EnsphereCore\Commands\Ensphere\Install\Update\Command',
 		'EnsphereCore\Commands\Ensphere\Make\Command',
 		'EnsphereCore\Commands\Ensphere\Database\Command',
+		'EnsphereCore\Commands\Ensphere\Modules\Command',
 
 	];
 
