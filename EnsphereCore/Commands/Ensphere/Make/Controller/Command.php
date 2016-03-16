@@ -96,8 +96,8 @@ class Command {
 		$singular = str_singular( $this->name );
 		$create = "Create{$singular}Request";
 		$edit = "Edit{$singular}Request";
-		Artisan::call( 'make:request', [ '--name' => $edit ]);
-		Artisan::call( 'make:request', [ '--name' => $create ]);
+		Artisan::call( 'make:request', [ 'name' => $edit ]);
+		Artisan::call( 'make:request', [ 'name' => $create ]);
 	}
 
 }

@@ -23,7 +23,7 @@ class {{NAME}} extends Contract implements Blueprint {
 	 */
 	public function index( $controller )
 	{
-		$controller->setLayoutView( view( '::{{CAMEL_PLURAL}}.index', [
+		$controller->setLayoutView( view( '{{CAMEL_PLURAL}}.index', [
 			'{{CAMEL_PLURAL}}' => $this->model->orderBy('name')->paginate( 20 )
 		]));
 	}
@@ -60,7 +60,7 @@ class {{NAME}} extends Contract implements Blueprint {
 	{
 		${{CAMEL_PLURAL}} = $this->model->findOrFail( ${{IDNAME}} );
 
-		return $controller->success( '{{NAME}} successfully edited');
+		return $controller->success( '{{SINGLE}} successfully edited');
 	}
 
 	/**
@@ -71,7 +71,7 @@ class {{NAME}} extends Contract implements Blueprint {
 	 */
 	public function {{CREATE_METHOD}}( $controller, {{CREATE_REQUEST}} $request )
 	{
-		return $controller->success( '{{NAME}} successfully created. You can <a href="' . route( 'get.{{CAMEL_PLURAL}}.edit', ${{CAMEL_SINGULAR}}->id ) . '">edit it here</a>.');
+		return $controller->success( '{{SINGLE}} successfully created. You can <a href="' . route( 'get.{{CAMEL_PLURAL}}.edit', ${{CAMEL_SINGULAR}}->id ) . '">edit it here</a>.');
 	}
 
 	/**
@@ -83,7 +83,7 @@ class {{NAME}} extends Contract implements Blueprint {
 	{
 		${{CAMEL_SINGULAR}} = $this->model->findOrFail( ${{IDNAME}} );
 		${{CAMEL_SINGULAR}}->delete();
-		return $controller->success( '{{NAME}} successfully deleted.', redirect( route( 'get.{{CAMEL_PLURAL}}' ) ) );
+		return $controller->success( '{{SINGLE}} successfully deleted.', redirect( route( 'get.{{CAMEL_PLURAL}}' ) ) );
 	}
 
 	/**

@@ -60,7 +60,9 @@ class Command {
 				'{{SHOW_CREATE_METHOD}}',
 				'{{EDIT_METHOD}}',
 				'{{EDIT_REQUEST}}',
-				'{{SHOW_EDIT_METHOD}}'
+				'{{SHOW_EDIT_METHOD}}',
+				'{{CAMEL_PLURAL}}',
+				'{{CAMEL_SINGULAR}}'
 			],
 			[
 				$this->name,
@@ -73,7 +75,9 @@ class Command {
 				"showCreate{$singular}",
 				"edit{$singular}",
 				"Edit{$singular}Request",
-				"showEdit{$singular}"
+				"showEdit{$singular}",
+				$camelPlural,
+				$camelSingular
 			],
 			$tmpl );
 		$path = app_path( "Contracts/{$this->name}.php" );
