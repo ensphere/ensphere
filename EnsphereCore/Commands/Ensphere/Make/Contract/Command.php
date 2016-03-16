@@ -43,9 +43,39 @@ class Command {
 	 */
 	protected function createContract()
 	{
-		$name = rtrim( $this->name, 's' );
+		$singular = str_singular( $this->name );
+		$camelSingular = lcfirst( $singular );
+		$camelPlural = lcfirst( $this->name );
+
 		$tmpl = file_get_contents( __DIR__ . "/Contract.tmpl" );
-		$tmpl = str_replace( [ '{{NAME}}', '{{NAMESPACE}}', '{{SINGLE}}' ], [ $this->name, $this->namespace, $name ], $tmpl );
+		$tmpl = str_replace(
+			[
+				'{{NAME}}',
+				'{{NAMESPACE}}',
+				'{{SINGLE}}',
+				'{{DELETE_METHOD}}',
+				'{{IDNAME}}' ,
+				'{{CREATE_METHOD}}',
+				'{{CREATE_REQUEST}}',
+				'{{SHOW_CREATE_METHOD}}',
+				'{{EDIT_METHOD}}',
+				'{{EDIT_REQUEST}}',
+				'{{SHOW_EDIT_METHOD}}'
+			],
+			[
+				$this->name,
+				$this->namespace,
+				$singular,
+				"delete{$singular}",
+				"{$camelSingular}ID",
+				"create{$singular}",
+				"Create{$singular}Request",
+				"showCreate{$singular}",
+				"edit{$singular}",
+				"Edit{$singular}Request",
+				"showEdit{$singular}"
+			],
+			$tmpl );
 		$path = app_path( "Contracts/{$this->name}.php" );
 		if( ! file_exists( $path ) ) {
 			file_put_contents( $path, $tmpl );
@@ -72,7 +102,7 @@ class Command {
 	 */
 	protected function createModel()
 	{
-		$name = rtrim( $this->name, 's' );
+		$name = str_singular( $this->name );
 		$tmpl = file_get_contents( __DIR__ . "/Model.tmpl" );
 		$tmpl = str_replace( [ '{{NAME}}', '{{NAMESPACE}}' ], [ $name, $this->namespace ], $tmpl );
 		$path = app_path( "Models/{$name}.php" );

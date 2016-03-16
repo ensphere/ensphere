@@ -32,6 +32,7 @@ class Command {
 		$this->name = ucfirst( camel_case( $name ) );
 		$this->createController();
 		$this->createContract();
+		$this->createRequests();
 	}
 
 	/**
@@ -40,8 +41,37 @@ class Command {
 	 */
 	protected function createController()
 	{
+
+		$singular = str_singular( $this->name );
+		$camelSingular = lcfirst( $singular );
+
 		$tmpl = file_get_contents( __DIR__ . "/Controller.tmpl" );
-		$tmpl = str_replace( [ '{{NAME}}', '{{NAMESPACE}}' ], [ $this->name, $this->namespace ], $tmpl );
+		$tmpl = str_replace(
+			[
+				'{{NAME}}',
+				'{{NAMESPACE}}',
+				'{{DELETE_METHOD}}',
+				'{{IDNAME}}' ,
+				'{{CREATE_METHOD}}',
+				'{{CREATE_REQUEST}}',
+				'{{SHOW_CREATE_METHOD}}',
+				'{{EDIT_METHOD}}',
+				'{{EDIT_REQUEST}}',
+				'{{SHOW_EDIT_METHOD}}'
+			],
+			[
+				$this->name,
+				$this->namespace,
+				"delete{$singular}",
+				"{$camelSingular}ID",
+				"create{$singular}",
+				"Create{$singular}Request",
+				"showCreate{$singular}",
+				"edit{$singular}",
+				"Edit{$singular}Request",
+				"showEdit{$singular}"
+			],
+			 $tmpl );
 		$path = app_path( "Http/Controllers/{$this->name}Controller.php" );
 		if( ! file_exists( $path ) ) {
 			file_put_contents( $path, $tmpl );
@@ -55,6 +85,19 @@ class Command {
 	protected function createContract()
 	{
 		(new ContractCommand)->make( $this->name );
+	}
+
+	/**
+	 * [createRequests description]
+	 * @return [type] [description]
+	 */
+	protected function createRequests()
+	{
+		$singular = str_singular( $this->name );
+		$create = "Create{$singular}Request";
+		$edit = "Edit{$singular}Request";
+		Artisan::call( 'make:request', [ '--name' => $edit ]);
+		Artisan::call( 'make:request', [ '--name' => $create ]);
 	}
 
 }
