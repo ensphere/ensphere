@@ -95,7 +95,7 @@ class Command extends IlluminateCommand {
 	 */
 	protected function seed()
 	{
-		$seeds = Session::get( 'seed' );
+		$seeds = (array) Session::get( 'seed' );
 		foreach( $seeds as $seed ) {
 			$this->info( "seeding {$seed}...");
 			(new $seed)->run();
