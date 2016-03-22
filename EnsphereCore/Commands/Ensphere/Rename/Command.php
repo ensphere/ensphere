@@ -152,6 +152,7 @@ class Command extends IlluminateCommand {
 		$this->updateGulpFile();
 		$this->updateComposerFile();
 		$this->updatePackagesFile();
+		$this->updateDotGitIgnoreFile();
 	}
 
 	/**
@@ -258,6 +259,19 @@ class Command extends IlluminateCommand {
 	private function updateGulpFile()
 	{
 		$file = base_path('gulpfile.js');
+		if( ! file_exists( $file ) ) return;
+		$contents = file_get_contents( $file );
+		$newContents = str_replace( "public/package/{$this->currentVendor}/{$this->currentModule}/", "public/package/{$this->vendor}/{$this->module}/", $contents );
+		file_put_contents( $file, $newContents );
+	}
+
+	/**
+	 * [updateDotGitIgnoreFile description]
+	 * @return [type] [description]
+	 */
+	private function updateDotGitIgnoreFile()
+	{
+		$file = base_path('.gitignore');
 		if( ! file_exists( $file ) ) return;
 		$contents = file_get_contents( $file );
 		$newContents = str_replace( "public/package/{$this->currentVendor}/{$this->currentModule}/", "public/package/{$this->vendor}/{$this->module}/", $contents );
