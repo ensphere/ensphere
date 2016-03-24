@@ -17,8 +17,15 @@ class Generate {
 				$packageProviders = $data->providers;
 			}
 		}
-		//dd(array_merge( $laravelProviders, $packageProviders, $appProviders ));
-		return array_merge( $laravelProviders, $packageProviders, $appProviders );
+		$return = array_merge( $laravelProviders, $packageProviders, $appProviders );
+		if ( strpos( php_sapi_name(), 'cli' ) !== false ) {
+			foreach( $return as $key => $provider ) {
+				if( ! class_exists( $provider ) ) {
+					unset( $return[$key] );
+				}
+			}
+		}
+		return $return;
 	}
 
 	/**
