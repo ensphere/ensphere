@@ -275,6 +275,7 @@ class Command extends IlluminateCommand {
 		if( ! file_exists( $file ) ) return;
 		$contents = file_get_contents( $file );
 		$newContents = str_replace( "public/package/{$this->currentVendor}/{$this->currentModule}/", "public/package/{$this->vendor}/{$this->module}/", $contents );
+		$newContents = preg_replace( "#^!/public/package/{$this->currentVendor}/$#is", "!/public/package/{$this->vendor}/", $newContents );
 		file_put_contents( $file, $newContents );
 	}
 
