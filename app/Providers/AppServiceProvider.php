@@ -26,7 +26,8 @@ class AppServiceProvider extends ServiceProvider
 		$this->loadViewsFrom( __DIR__ . '/../../resources/views', 'ensphere.ensphere' );
 		if( $this->isModule() ) {
 			$this->publishes( Publish::bower([
-				__DIR__ . '/../../public/package/ensphere/ensphere/' => base_path( 'public/package/ensphere/ensphere/' )
+				__DIR__ . '/../../public/package/ensphere/ensphere/' => base_path( 'public/package/ensphere/ensphere/' ),
+				__DIR__ . '/../../resources/database/migrations/' => database_path( 'migrations/vendor/ensphere/ensphere/' )
 			], __DIR__ ));
 		}
 	}
