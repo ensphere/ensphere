@@ -84,8 +84,10 @@ class Command extends IlluminateCommand {
 	 */
 	private function publishVendorAssets()
 	{
+		$this->info('publishing config files...')
+		$this->info( shell_exec( "php artisan vendor:publish --tag=config" ) );
 		$this->info('pushing module assets to application...');
-		$this->info( shell_exec( "php artisan vendor:publish --force" ) );
+		$this->info( shell_exec( "php artisan vendor:publish --tag=forced --force" ) );
 	}
 
 	/**

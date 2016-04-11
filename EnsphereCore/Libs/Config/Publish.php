@@ -14,7 +14,9 @@ class Publish {
 		foreach( new DirectoryIterator( $providerPath . '/../../public/vendor/' ) as $folderInfo )
 		{
 			if( $folderInfo->isDot() || ! $folderInfo->isDir() ) continue;
-			$publish[$providerPath . '/../../public/vendor/' . $folderInfo->getFilename()] = base_path( 'public/vendor/' . $folderInfo->getFilename() );
+			if( ! file_exists( base_path( 'public/vendor/' . $folderInfo->getFilename() ) ) ) {
+				$publish[$providerPath . '/../../public/vendor/' . $folderInfo->getFilename()] = base_path( 'public/vendor/' . $folderInfo->getFilename() );
+			}
 		}
 		return $publish;
 	}
