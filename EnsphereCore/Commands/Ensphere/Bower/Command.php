@@ -172,13 +172,39 @@ class Command extends IlluminateCommand {
 	}
 
 	/**
+	 * [buildCombinedAssets description]
+	 * @param  [type] $assetGroups [description]
+	 * @return [type]              [description]
+	 */
+	protected function buildCombinedAssets( $assetGroups )
+	{
+		foreach( $assetGroups as $saveAs => $assets ) {
+			$data = '';
+			foreach( $assets as $asset ) {
+				$data .= file_get_contents( public_path( ltrim( $asset, '/' ) ) );
+			}
+			file_put_contents( public_path( $saveAs ), $data );
+		}
+	}
+
+	/**
 	 * [generateTemplate description]
 	 * @return [type] [description]
 	 */
 	private function generateTemplate()
 	{
-		$js = array_merge( $this->getJavascriptFiles(), $this->getModuleJsFiles() );
-		$css = array_merge( $this->getStyleFiles(), $this->getModuleCssFiles() );
+
+		if ( \App::environment( 'local' ) ) {
+			$js = array_merge( $this->getJavascriptFiles(), $this->getModuleJsFiles() );
+			$css = array_merge( $this->getStyleFiles(), $this->getModuleCssFiles() );
+		} else {
+			$this->buildCombinedAssets([
+				'javascripts.js' => $this->getModuleJsFiles(),
+				'stylesheets.css' => $this->getModuleCssFiles()
+			]);
+			$js = array_merge( $this->getJavascriptFiles(), ['/javascripts.js'] );
+			$css = array_merge( $this->getStyleFiles(), ['/stylesheets.css'] );
+		}
 		file_put_contents( $this->writePath . 'loader.blade.php', self::assetLoaderTemplate( $js, $css ) );
 	}
 
