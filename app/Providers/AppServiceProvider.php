@@ -28,7 +28,7 @@ class AppServiceProvider extends ServiceProvider
 			$this->publishes( Publish::bower([
 				__DIR__ . '/../../public/package/ensphere/ensphere/' => base_path( 'public/package/ensphere/ensphere/' ),
 				__DIR__ . '/../../resources/database/migrations/' => database_path( 'migrations/vendor/ensphere/ensphere/' )
-			], __DIR__ ));
+			], __DIR__ ), 'forced' );
 		}
 	}
 
