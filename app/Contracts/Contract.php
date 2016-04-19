@@ -58,5 +58,14 @@ abstract class Contract
         return $this->model->paginate( $amount );
     }
 
+    /**
+     * [model description]
+     * @return [type] [description]
+     */
+    public function model()
+    {
+        return $this->model;
+    }
+
 
 }
