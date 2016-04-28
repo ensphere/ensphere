@@ -276,7 +276,7 @@ class Command extends IlluminateCommand {
 		$contents = explode( "\n", file_get_contents( $file ) );
 		foreach( $contents as $key => $line ) {
 			$line = trim( $line );
-			$contents[$key] = str_replace( "public/package/{$this->currentVendor}/{$this->currentModule}/", "public/package/{$this->vendor}/{$this->module}/", $line );
+			$line = preg_replace( "#^(.*){$this->currentVendor}/{$this->currentModule}(.*)$#is", "$1{$this->vendor}/{$this->module}$2", $line );
 			$contents[$key] = preg_replace( "#^!/public/package/{$this->currentVendor}/$#is", "!/public/package/{$this->vendor}/", $line );
 		}
 		$contents = implode( "\n", $contents );
