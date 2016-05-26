@@ -1,9 +1,16 @@
+
+.env
+.DS_Store
+composer.lock
+
 /vendor
 /node_modules
 /bower_components
 /config/packages.json
-config/packages.json
-composer.lock
+/resourses/views/loader.blade.php
+/public/javascripts.js
+/public/stylesheets.css
+
 
 /database/migrations/vendor/*
 /database/seeds/vendor/*
