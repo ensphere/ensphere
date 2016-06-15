@@ -2,6 +2,7 @@
 .env
 .DS_Store
 composer.lock
+.env
 
 /vendor
 /node_modules

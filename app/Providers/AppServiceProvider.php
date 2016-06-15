@@ -23,7 +23,8 @@ class AppServiceProvider extends ServiceProvider
 	 */
 	public function boot()
 	{
-		$this->loadViewsFrom( __DIR__ . '/../../resources/views', 'ensphere.ensphere' );
+		/** Adding the location not a named space so it can check the application first then the module */
+		view()->addLocation( __DIR__ . '/../../resources/views' );
 		if( $this->isModule() ) {
 			$this->publishes( Publish::bower([
 				__DIR__ . '/../../public/package/ensphere/ensphere/' => base_path( 'public/package/ensphere/ensphere/' ),
