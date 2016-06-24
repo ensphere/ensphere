@@ -163,9 +163,12 @@ class Command extends IlluminateCommand {
 				window.loadStyles();
 				window.loadScripts(function(){ if( document.body ) $(document).trigger('ready'); if( document.readyState == 'complete' ) $(window).trigger('load'); });
 			};
-			var raf = requestAnimationFrame || mozRequestAnimationFrame || webkitRequestAnimationFrame || msRequestAnimationFrame;
-			if (raf) raf(cb);
-			else window.addEventListener('load', cb);
+			try {
+				var raf = requestAnimationFrame || mozRequestAnimationFrame || webkitRequestAnimationFrame || msRequestAnimationFrame;
+				raf(cb);
+			} catch(e) {
+				window.addEventListener('load', cb);
+			}
 		</script>
 		";
 
