@@ -149,7 +149,7 @@ class Command extends IlluminateCommand {
 		<script>
 			var styles = [{$cssFileAsString}];
 			var scripts = [{$jsFilesAsString}];
-			var cb = function() {
+			(function() {
 				window.loadStyles = function() {
 					var href = styles.shift(); var h = document.getElementsByTagName('head')[0]; var l = document.createElement('link');
 					l.rel = 'stylesheet'; l.href = href;l.onload = function(){if( styles.length !== 0 ){window.loadStyles();}};h.appendChild(l);
@@ -162,13 +162,7 @@ class Command extends IlluminateCommand {
 				};
 				window.loadStyles();
 				window.loadScripts(function(){ if( document.body ) $(document).trigger('ready'); if( document.readyState == 'complete' ) $(window).trigger('load'); });
-			};
-			try {
-				var raf = requestAnimationFrame || mozRequestAnimationFrame || webkitRequestAnimationFrame || msRequestAnimationFrame;
-				raf(cb);
-			} catch(e) {
-				window.addEventListener('load', cb);
-			}
+			})();
 		</script>
 		";
 
