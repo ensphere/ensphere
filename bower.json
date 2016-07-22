@@ -2,6 +2,6 @@
 	"name" : "ensphere",
 	"dependencies" : {
 		"semantic-ui" : "2.1.8",
-		"jquery" : "*"
+		"jquery" : "2.*"
 	}
 }
