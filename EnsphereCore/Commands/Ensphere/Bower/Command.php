@@ -1,5 +1,6 @@
 <?php namespace EnsphereCore\Commands\Ensphere\Bower;
 
+use EnsphereCore\Commands\Ensphere\Traits\Module as ModuleTrait;
 use Illuminate\Console\Command as IlluminateCommand;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
@@ -7,6 +8,8 @@ use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 
 class Command extends IlluminateCommand {
+
+	use ModuleTrait;
 
 	/**
 	 * The console command name.
@@ -53,6 +56,12 @@ class Command extends IlluminateCommand {
 	private $bowers = [];
 
 	/**
+	 * [$currentModuleData description]
+	 * @var [type]
+	 */
+	private $currentModuleData;
+
+	/**
 	 * Create a new command instance.
 	 *
 	 * @return void
@@ -61,6 +70,7 @@ class Command extends IlluminateCommand {
 	{
 		parent::__construct();
 		$this->writePath = base_path($this->writePath);
+		$this->currentModuleData = $this->getCurrentVendorAndModuleName();
 	}
 
 	/**
@@ -212,13 +222,21 @@ class Command extends IlluminateCommand {
 	protected function getModuleJsFiles()
 	{
 		$files = array();
+		$currentModule = false;
 		if( file_exists( public_path( 'package' ) ) ) {
 			$it = new RecursiveDirectoryIterator( public_path( 'package' ) );
 			foreach( new RecursiveIteratorIterator( $it ) as $file ) {
 				if( $file->getExtension() === 'js' ) {
-					$files[] = str_replace( public_path(), '', $file->getPathname() );
+					if( strpos( $file->getPathname(), '/' . $this->currentModuleData['vendor'] . '/' . $this->currentModuleData['module'] . '/js/' ) !== false ) {
+						$currentModule = $file->getPathname();
+					} else {
+						$files[] = str_replace( public_path(), '', $file->getPathname() );
+					}
 				}
 			}
+		}
+		if( $currentModule ) {
+			$files[] = str_replace( public_path(), '', $currentModule );
 		}
 		return $files;
 	}
@@ -230,13 +248,21 @@ class Command extends IlluminateCommand {
 	protected function getModuleCssFiles()
 	{
 		$files = array();
+		$currentModule = false;
 		if( file_exists( public_path( 'package' ) ) ) {
 			$it = new RecursiveDirectoryIterator( public_path( 'package' ) );
 			foreach( new RecursiveIteratorIterator( $it ) as $file ) {
 				if( $file->getExtension() === 'css' ) {
-					$files[] = str_replace( public_path(), '', $file->getPathname() );
+					if( strpos( $file->getPathname(), '/' . $this->currentModuleData['vendor'] . '/' . $this->currentModuleData['module'] . '/css/' ) !== false ) {
+						$currentModule = $file->getPathname();
+					} else {
+						$files[] = str_replace( public_path(), '', $file->getPathname() );
+					}
 				}
 			}
+		}
+		if( $currentModule ) {
+			$files[] = str_replace( public_path(), '', $currentModule );
 		}
 		return $files;
 	}
