@@ -1,6 +1,5 @@
 <?php namespace EnsphereCore\Commands\Ensphere\Bower;
 
-use EnsphereCore\Commands\Ensphere\Traits\Module as ModuleTrait;
 use Illuminate\Console\Command as IlluminateCommand;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
@@ -8,8 +7,6 @@ use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 
 class Command extends IlluminateCommand {
-
-	use ModuleTrait;
 
 	/**
 	 * The console command name.
@@ -56,12 +53,6 @@ class Command extends IlluminateCommand {
 	private $bowers = [];
 
 	/**
-	 * [$currentModuleData description]
-	 * @var [type]
-	 */
-	private $currentModuleData;
-
-	/**
 	 * Create a new command instance.
 	 *
 	 * @return void
@@ -70,7 +61,6 @@ class Command extends IlluminateCommand {
 	{
 		parent::__construct();
 		$this->writePath = base_path($this->writePath);
-		$this->currentModuleData = $this->getCurrentVendorAndModuleName();
 	}
 
 	/**
@@ -152,30 +142,14 @@ class Command extends IlluminateCommand {
 	 */
 	public static function assetLoaderTemplate( $jsFiles, $cssFiles ) {
 
-		$cssFileAsString = "'" . implode( "','", $cssFiles ) . "'";
-		$jsFilesAsString = "'" . implode( "','", $jsFiles ) . "'";
-
-		return "
-		<script>
-			var styles = [{$cssFileAsString}];
-			var scripts = [{$jsFilesAsString}];
-			(function() {
-				window.loadStyles = function() {
-					var href = styles.shift(); var h = document.getElementsByTagName('head')[0]; var l = document.createElement('link');
-					l.rel = 'stylesheet'; l.href = href;l.onload = function(){if( styles.length !== 0 ){window.loadStyles();}};h.appendChild(l);
-				};
-				window.loadScripts = function( _callback ) {
-					var callback = _callback || function(){};
-					var src = scripts.shift(); var h = document.getElementsByTagName('head')[0]; var html = document.getElementsByTagName('html')[0]; var l = document.createElement('script');
-					l.rel = 'text/javascript'; l.src = src;
-					l.onload = function(){if( scripts.length !== 0 ) {window.loadScripts( _callback );} else {html.className += ' loaded';callback();}};h.appendChild(l);
-				};
-				window.loadStyles();
-				window.loadScripts(function(){ if( document.body ) $(document).trigger('ready'); if( document.readyState == 'complete' ) $(window).trigger('load'); });
-			})();
-		</script>
-		";
-
+		$return = '';
+		foreach( $cssFiles as $file ) {
+			$return .= "<link href='{$file}' rel='stylesheet' type='text/css'>\n\r";
+		}
+		foreach( $jsFiles as $file ) {
+			$return .= "<script src='{$file}'></script>\n\r";
+		}
+		return $return;
 	}
 
 	/**
@@ -183,14 +157,33 @@ class Command extends IlluminateCommand {
 	 * @param  [type] $assetGroups [description]
 	 * @return [type]              [description]
 	 */
-	protected function buildCombinedAssets( $assetGroups )
+	protected function buildCombinedAssets( $assetGroups, $minify = true )
 	{
 		foreach( $assetGroups as $saveAs => $assets ) {
 			$data = '';
 			foreach( $assets as $asset ) {
 				$data .= file_get_contents( public_path( ltrim( $asset, '/' ) ) );
 			}
-			file_put_contents( public_path( $saveAs ), $data );
+			if( $saveAs === 'javascripts.js' ) {
+
+				if( $minify ) {
+					$minifier = new \MatthiasMullie\Minify\JS;
+					$minifier->add( $data );
+					$data = $minifier->minify();
+				}
+
+				file_put_contents( public_path( $saveAs ), $data );
+
+			} else {
+
+				if( $minify ) {
+					$minifier = new \MatthiasMullie\Minify\CSS;
+					$minifier->add( $data );
+					$data = $minifier->minify();
+				}
+
+				file_put_contents( public_path( $saveAs ), $data );
+			}
 		}
 	}
 
@@ -222,21 +215,13 @@ class Command extends IlluminateCommand {
 	protected function getModuleJsFiles()
 	{
 		$files = array();
-		$currentModule = false;
 		if( file_exists( public_path( 'package' ) ) ) {
 			$it = new RecursiveDirectoryIterator( public_path( 'package' ) );
 			foreach( new RecursiveIteratorIterator( $it ) as $file ) {
 				if( $file->getExtension() === 'js' ) {
-					if( strpos( $file->getPathname(), '/' . $this->currentModuleData['vendor'] . '/' . $this->currentModuleData['module'] . '/js/' ) !== false ) {
-						$currentModule = $file->getPathname();
-					} else {
-						$files[] = str_replace( public_path(), '', $file->getPathname() );
-					}
+					$files[] = str_replace( public_path(), '', $file->getPathname() );
 				}
 			}
-		}
-		if( $currentModule ) {
-			$files[] = str_replace( public_path(), '', $currentModule );
 		}
 		return $files;
 	}
@@ -248,21 +233,13 @@ class Command extends IlluminateCommand {
 	protected function getModuleCssFiles()
 	{
 		$files = array();
-		$currentModule = false;
 		if( file_exists( public_path( 'package' ) ) ) {
 			$it = new RecursiveDirectoryIterator( public_path( 'package' ) );
 			foreach( new RecursiveIteratorIterator( $it ) as $file ) {
 				if( $file->getExtension() === 'css' ) {
-					if( strpos( $file->getPathname(), '/' . $this->currentModuleData['vendor'] . '/' . $this->currentModuleData['module'] . '/css/' ) !== false ) {
-						$currentModule = $file->getPathname();
-					} else {
-						$files[] = str_replace( public_path(), '', $file->getPathname() );
-					}
+					$files[] = str_replace( public_path(), '', $file->getPathname() );
 				}
 			}
-		}
-		if( $currentModule ) {
-			$files[] = str_replace( public_path(), '', $currentModule );
 		}
 		return $files;
 	}
