@@ -51,11 +51,26 @@ class Command extends IlluminateCommand {
 	}
 
 	/**
+	 * [checkFoldersExists description]
+	 * @param  [type] $vendorFolder [description]
+	 * @param  [type] $moduleFolder [description]
+	 * @return [type]               [description]
+	 */
+	protected function checkFoldersExists( $vendorFolder, $moduleFolder )
+	{
+		$path = base_path( 'database/migrations/vendor/' . $vendorFolder . '/' );
+		if( ! file_exists( $path ) ) mkdir( $path, 0777 );
+		$path = base_path( 'database/migrations/vendor/' . $vendorFolder . '/' . $moduleFolder . '/' );
+		if( ! file_exists( $path ) ) mkdir( $path, 0777 );
+	}
+
+	/**
 	 * [createMigration description]
 	 * @return [type] [description]
 	 */
 	private function createMigration() {
 		$migrationName = $this->option('name');
+		$this->checkFoldersExists( $this->currentStructure['vendor'], $this->currentStructure['module'] );
 		$databaseFolder = base_path( 'database/migrations/vendor/' . $this->currentStructure['vendor'] . '/' . $this->currentStructure['module'] . '/' );
 		$result = Artisan::call( 'make:migration', array(
 			'name' => $migrationName,
