@@ -20,3 +20,4 @@ composer.lock
 !/public/package/ensphere/
 !/public/package/ensphere/ensphere/
 !/public/package/ensphere/ensphere/**/*
+resources/views/loader.blade.php

@@ -10,6 +10,7 @@ use FilesystemIterator;
 use DirectoryIterator;
 use Artisan;
 use Session;
+use Illuminate\Database\QueryException;
 
 class Command extends IlluminateCommand {
 
@@ -85,18 +86,24 @@ class Command extends IlluminateCommand {
 	 */
 	public function runMigration() {
 		$this->line( 'running application migration' );
-		Artisan::call('migrate');
+		Artisan::call( 'migrate', [ '--force' => true ] );
 		$this->line( 'running vendor migration' );
 		$folder = base_path( 'database/migrations/vendor/' );
 		foreach( new DirectoryIterator( $folder ) as $vendorInfo ) {
 			if( $vendorInfo->isDir() && ! $vendorInfo->isDot() ) {
 				$vendor = $vendorInfo->getBasename();
 				foreach( new DirectoryIterator( $folder . $vendor ) as $moduleInfo ) {
-					if( $moduleInfo->isDir() && ! $moduleInfo->isDot() ) {
-						$module = $moduleInfo->getBasename();
-						$result = Artisan::call( 'migrate', array(
-							'--path' => "database/migrations/vendor/{$vendor}/{$module}/"
-						));
+					try {
+						if( $moduleInfo->isDir() && ! $moduleInfo->isDot() ) {
+							$module = $moduleInfo->getBasename();
+							$this->info("migratiing database/migrations/vendor/{$vendor}/{$module}/...");
+							$result = Artisan::call( 'migrate', array(
+								'--path' => "database/migrations/vendor/{$vendor}/{$module}/",
+								'--force' => true
+							));
+						}
+					} catch ( QueryException $e) {
+					
 					}
 				}
 			}
