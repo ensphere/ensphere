@@ -5,7 +5,7 @@
 		<title>Ensphere</title>
 		<link rel="shortcut icon" href="/favicon.png">
 		<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,300' rel='stylesheet' type='text/css'>
-		@include('ensphere.ensphere::loader')
+		@include('loader')
 		<style>
 		html {
 			height: 100%;
