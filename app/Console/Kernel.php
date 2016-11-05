@@ -12,18 +12,6 @@ class Kernel extends ConsoleKernel {
 	 */
 	protected $commands = [
 
-		'EnsphereCore\Commands\Ensphere\Rename\Command',
-		'EnsphereCore\Commands\Ensphere\Export\Command',
-		'EnsphereCore\Commands\Ensphere\Import\Command',
-		'EnsphereCore\Commands\Ensphere\Bower\Command',
-		'EnsphereCore\Commands\Ensphere\Migrate\Command',
-		'EnsphereCore\Commands\Ensphere\Registration\Command',
-		'EnsphereCore\Commands\Ensphere\Install\Command',
-		'EnsphereCore\Commands\Ensphere\Install\Update\Command',
-		'EnsphereCore\Commands\Ensphere\Make\Command',
-		'EnsphereCore\Commands\Ensphere\Database\Command',
-		'EnsphereCore\Commands\Ensphere\Modules\Command',
-
 	];
 
 	/**
