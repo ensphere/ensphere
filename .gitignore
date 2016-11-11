@@ -11,6 +11,7 @@ composer.lock
 /resourses/views/loader.blade.php
 /public/javascripts.js
 /public/stylesheets.css
+/asset-version.json
 
 
 /database/migrations/vendor/*
