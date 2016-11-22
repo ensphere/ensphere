@@ -14,7 +14,7 @@
 		"laravel/framework": "5.2.*",
 		"laravelcollective/html": "v5.2.4",
 		"filp/whoops": "~1.0",
-		"matthiasmullie/minify": "^1.3",
+		"matthiasmullie/minify": "1.3.*",
 		"ensphere/core" : "dev-master"
 	},
 	"require-dev": {
