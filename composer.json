@@ -7,14 +7,14 @@
 	"repositories": [
  		{
             		"type": "composer",
-            		"url": "http://modules.testing.pm"
+            		"url": "https://modules.testing.pm"
  		}
  	],
 	"require": {
 		"laravel/framework": "5.2.*",
 		"laravelcollective/html": "v5.2.4",
 		"filp/whoops": "~1.0",
-		"ensphere/core" : "dev-master"
+		"ensphere/core" : "*"
 	},
 	"require-dev": {
 		"phpunit/phpunit": "~4.0",
@@ -52,5 +52,12 @@
 	"config": {
 		"preferred-install": "dist",
 		"secure-http" : false
+	},
+	"extra" : {
+		"bower" : {
+			"require" : {
+
+			}
+		}
 	}
 }

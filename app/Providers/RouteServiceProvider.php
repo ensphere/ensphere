@@ -1,5 +1,8 @@
-<?php namespace Ensphere\Ensphere\Providers;
+<?php
 
+namespace Ensphere\Ensphere\Providers;
+
+use Ensphere\Ensphere\Contracts\Blueprints\RoutesBlueprint;
 use Illuminate\Routing\Router;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
@@ -20,11 +23,9 @@ class RouteServiceProvider extends ServiceProvider {
 	 * @param  \Illuminate\Routing\Router  $router
 	 * @return void
 	 */
-	public function boot(Router $router)
+	public function boot( Router $router )
 	{
-		parent::boot($router);
-
-		//
+		parent::boot( $router );
 	}
 
 	/**
@@ -33,11 +34,13 @@ class RouteServiceProvider extends ServiceProvider {
 	 * @param  \Illuminate\Routing\Router  $router
 	 * @return void
 	 */
-	public function map(Router $router)
+	public function map( Router $router )
 	{
-		$router->group(['namespace' => $this->namespace], function($router)
+		$router->group( [ 'namespace' => $this->namespace ], function( $router )
 		{
-			require __DIR__ . '/../Http/routes.php';
+            if( app()->bound( RoutesBlueprint::class ) ) {
+                app()->make( RoutesBlueprint::class )->routes( $router );
+            }
 		});
 	}
 

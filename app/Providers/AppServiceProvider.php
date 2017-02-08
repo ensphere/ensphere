@@ -1,4 +1,6 @@
-<?php namespace Ensphere\Ensphere\Providers;
+<?php
+
+namespace Ensphere\Ensphere\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use EnsphereCore\Libs\Config\Publish;

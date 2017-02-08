@@ -1,7 +1,0 @@
-{
-	"name" : "ensphere",
-	"dependencies" : {
-		"semantic-ui" : "2.1.8",
-		"jquery" : "2.*"
-	}
-}
