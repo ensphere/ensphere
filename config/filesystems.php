@@ -45,7 +45,7 @@ return [
 
 		'local' => [
 			'driver' => 'local',
-			'root'   => env( 'FILESYSTEM_ROOT', storage_path() . '/app' ),
+            'root'   => base_path( env( 'FILESYSTEM_ROOT', 'storage/app' ) ),
 		],
 
 		's3' => [

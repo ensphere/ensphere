@@ -48,7 +48,7 @@ class AppServiceProvider extends ServiceProvider
 
 			]);
 			foreach( $contracts as $blueprint => $contract ) {
-				$this->app->bind( $blueprint, $contract );
+				$this->app->singleton( $blueprint, $contract );
 			}
 		}
 	}
