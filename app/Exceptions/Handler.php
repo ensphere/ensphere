@@ -1,6 +1,6 @@
 <?php
 
-namespace Purposemedia\AdminMediaManager\Exceptions;
+namespace Ensphere\Ensphere\Exceptions;
 
 use EnsphereCore\Libs\Exceptions\ExceptionHandler;
 use Exception;
