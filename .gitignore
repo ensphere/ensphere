@@ -1,3 +1,5 @@
+
+
 #ensphere-vendor-ignore-start
 .env
 .DS_Store
@@ -7,6 +9,8 @@
 /bower_components
 
 /bower.json
+/composer.lock
+/modules.json
 /public/vendor/**/*
 /public/javascripts.js
 /config/packages.json
@@ -16,7 +20,7 @@
 /database/migrations/vendor/*
 /database/seeds/vendor/*
 /public/package/**/*
-!/public/package/purposemedia/
-!/public/package/purposemedia/admin-feeds/
-!/public/package/purposemedia/admin-feeds/**/*
+!/public/package/ensphere/
+!/public/package/ensphere/ensphere/
+!/public/package/ensphere/ensphere/**/*
 #ensphere-vendor-ignore-end
