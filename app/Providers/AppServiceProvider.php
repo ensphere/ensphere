@@ -9,10 +9,11 @@ use EnsphereCore\Libs\Providers\Service;
 class AppServiceProvider extends ServiceProvider
 {
 
-	/**
-	 * [isModule description]
-	 * @return boolean [description]
-	 */
+    /**
+     * Determines whether running as module or application
+     *
+     * @return bool
+     */
 	private function isModule()
 	{
 		return file_exists( __DIR__ . "/../../../../../vendor" );
@@ -38,6 +39,8 @@ class AppServiceProvider extends ServiceProvider
 	/**
 	 * THESE ARE APPLICATION CONTRACTS.
 	 * REGISTER MODULE CONTRACTS IN THE REGISTRATION FILE SO THEY CAN BE EXTENDED PER APPLICATION
+     *
+     * @return void
 	 */
 	public function register()
 	{

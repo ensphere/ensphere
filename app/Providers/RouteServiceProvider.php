@@ -5,8 +5,10 @@ namespace Ensphere\Ensphere\Providers;
 use Ensphere\Ensphere\Contracts\Blueprints\RoutesBlueprint;
 use Illuminate\Routing\Router;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
+use EnsphereCore\Libs\Routing\RouteExtender;
 
-class RouteServiceProvider extends ServiceProvider {
+class RouteServiceProvider extends ServiceProvider
+{
 
 	/**
 	 * This namespace is applied to the controller routes in your routes file.
@@ -34,14 +36,18 @@ class RouteServiceProvider extends ServiceProvider {
 	 * @param  \Illuminate\Routing\Router  $router
 	 * @return void
 	 */
-	public function map( Router $router )
-	{
-		$router->group( [ 'namespace' => $this->namespace ], function( $router )
-		{
+    public function map( Router $router )
+    {
+        $router->group( [ 'namespace' => $this->namespace ], function( $router )
+        {
             if( app()->bound( RoutesBlueprint::class ) ) {
-                app()->make( RoutesBlueprint::class )->routes( $router );
+                $routeContract = app()->make( RoutesBlueprint::class );
+                $routeContract->routes( $router );
+                if( method_exists( $routeContract, 'extendingRoutes' ) ) {
+                    app()->make( RoutesBlueprint::class )->extendingRoutes( new RouteExtender( $router ) );
+                }
             }
-		});
-	}
+        });
+    }
 
 }

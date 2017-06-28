@@ -2,4 +2,7 @@
 
 namespace Ensphere\Ensphere\Contracts\Blueprints;
 
-interface HelpersBlueprint { }
+interface HelpersBlueprint
+{
+
+}
