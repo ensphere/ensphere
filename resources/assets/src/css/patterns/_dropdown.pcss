@@ -1,0 +1,46 @@
+/**
+ * <button class="dropdown-trigger btn">Dropdown <span class="closed">&#9660;</span> <span class="open">&#9650;</span>
+ *     <ul class="list-bare dropdown-menu">
+ *       <li><a href="#">Action</a></li>
+ *       <li><a href="#">Another action</a></li>
+ *       <li><a href="#">Something else here</a></li>
+ *     </ul>
+ * </button>
+ */
+
+.dropdown-trigger {
+  position: relative;
+  text-align: left;
+  outline: none;
+  .open {
+    display: none;
+  }
+  &.active {
+    .open {
+      display: inline;
+    }
+    .closed {
+      display: none;
+    }
+  }
+  .dropdown-menu {
+    border: 1px solid #e2e2e2;
+    border-radius: 3px;
+    position: absolute;
+    margin-top: 5px;
+    top: 100%;
+    left: 0;
+    min-width: 180px;
+    li {
+      font-weight: normal;
+      a {
+        display: block;
+        padding: $base-space--quarter;
+      }
+      &:hover a, &:focus a {
+        background: #f5f5f5;
+        color: black;
+      }
+    }
+  }
+}

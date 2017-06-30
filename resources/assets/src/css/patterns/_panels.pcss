@@ -1,0 +1,68 @@
+/**
+ * <div class="panel">
+ *   <p>Lorem ipsum dolor sit amet.</p>
+ * </div>
+ */
+
+.panel {
+  margin-bottom: $base-space;
+  background: #f5f5f5;
+  padding: $base-space;
+
+  & > :last-child {
+    margin-bottom: 0;
+  }
+
+  &.panel--tiny {
+    padding: $base-space--quarter;
+  }
+
+  &.panel--small {
+    padding: $base-space--half;
+  }
+
+  &.panel--large {
+    padding: $base-space--double;
+  }
+
+  &.panel--extra-large {
+    padding: $base-space--triple;
+  }
+
+  &.panel--huge {
+    padding: $base-space--quadruple;
+  }
+
+  &.panel--info {
+    background: #43a0de;
+    color: white;
+    h1,h2,h3,h4,h5,h6 {
+      color: white;
+    }
+  }
+
+  &.panel--warning {
+    background: #f1c40f;
+    color: white;
+    h1,h2,h3,h4,h5,h6 {
+      color: white;
+    }
+  }
+
+  &.panel--danger {
+    background: #e74c3c;
+    color: white;
+    h1,h2,h3,h4,h5,h6 {
+      color: white;
+    }
+  }
+
+  &.panel--success {
+    background: #30cd73;
+    color: white;
+    h1,h2,h3,h4,h5,h6 {
+      color: white;
+    }
+  }
+
+}

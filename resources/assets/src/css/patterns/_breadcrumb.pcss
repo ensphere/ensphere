@@ -1,0 +1,23 @@
+/**
+ * <div class="breadcrumb">
+ *   <ul class="list-inline">
+ *     <li><a href="#" title="go to page title">Page 1</a></li>
+ *     <li><a href="#" title="go to page title">Page 2</a></li>
+ *     <li><a href="#" title="go to page title">Page 3</a></li>
+ *     <li>Current Page</li>
+ *   </ul>
+ * </div>
+ */
+
+.breadcrumb {
+  margin-bottom: $base-space;
+
+  li:after {
+    content: " ›";
+  }
+
+  li:last-child:after {
+    content: "";
+  }
+
+}

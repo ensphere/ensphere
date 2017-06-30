@@ -1,0 +1,50 @@
+ul, ol {
+	margin-bottom: $base-space;
+  list-style-position: outside;
+  padding-left: $base-space;
+}
+
+/* Remove extra vertical spacing when nesting lists. */
+li {
+  > ul,
+  > ol {
+    margin-bottom: 0;
+  }
+}
+
+/* Removes any indents and bullet points from lists. */
+.list-bare {
+  margin:  0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Displays a list of items in one line. */
+.list-inline {
+  margin:  0;
+  padding: 0;
+  list-style: none;
+  > li {
+    display: inline-block;
+  }
+}
+
+/* Comma delimited list to semantically mark up lists of tags, etc.
+N.B. This component requires that you remove the whitespace between LIs. The simplest (and valid) way to achieve this is by omitting the closing `</li>` tag. */
+.list-inline--delimited {
+  > li + li {
+    &:before {
+      content: ", ";
+    }
+  }
+}
+
+/* Definition lists */
+dt {
+  font-weight: bold;
+}
+
+dd {
+  background: none no-repeat left top;
+  padding-left: $base-space;
+}

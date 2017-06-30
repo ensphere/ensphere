@@ -1,0 +1,24 @@
+/* Top-level page styles */
+html {
+  font-size: 62.5%;
+  overflow-y: scroll;
+  height: 100%;
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+body {
+  font-family: $base-font-family;
+  font-size: $base-font-size; /* currently ems cause chrome bug misinterpreting rems on body element */
+  font-weight: $base-font-weight;
+  line-height: $base-line-height;
+  color: $base-text-color;
+  min-height: 100%;
+  background: $base-background-color;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+}

@@ -1,0 +1,109 @@
+/**
+ * 1. Allow us to style box model properties.
+ * 2. Line different sized buttons up a little nicer.
+ * 3. Make buttons inherit font styles (often necessary when styling `input`s as buttons).
+ * 4. Reset/normalize some styles.
+ * 5. Force all button-styled elements to appear clickable.
+ * 6. Fixes odd inner spacing in IE7.
+ * 7. Subtract the border size from the padding value so that buttons do not grow larger as we add borders.
+*/
+.btn {
+  display: inline-block; /* [1] */
+  vertical-align: middle; /* [2] */
+  font: inherit; /* [3] */
+  text-align: center; /* [4] */
+  border: $btn-border-width $btn-border-style $btn-border-color; /* [4] */
+  margin:  0; /* [4] */
+  cursor: pointer; /* [5] */
+  overflow: visible; /* [6] */
+  font-weight: normal;
+  color: $btn-color;
+  padding: $btn-padding--small $btn-padding;
+  background-color: $btn-background;
+  transition: border .2s ease-in-out;
+  border-radius: $btn-radius;
+  transition: all .2s ease-in-out;
+
+  &:hover {
+    text-decoration: none; /* [4] */
+    color: $btn-hover-color;
+    background-color: $btn-hover-background;
+  }
+}
+
+/* Fix a Firefox bug whereby `input type="submit"` gains 2px extra padding. */
+.btn::-moz-focus-inner{
+  border:  0;
+  padding: 0;
+}
+
+/* Small buttons. */
+.btn--small {
+  padding: $btn-padding--tiny $btn-padding--small;
+}
+
+/* Large buttons. */
+.btn--large {
+  padding: $btn-padding $btn-padding--large;
+}
+
+/* Full-width buttons. */
+.btn--full {
+  width: 100%;
+}
+
+/* Round-ended buttons. 1. Overly-large value to ensure the radius rounds the whole end of the button. */
+.btn--pill {
+  border-radius: 100px; /* [1] */
+}
+
+.btn--blue {
+  background: $corporate;
+  border-color: $corporate;
+  &:hover {
+    background: #1f8090;
+    border-color: #1f8090;
+  }
+}
+
+.btn--black {
+  background: $black;
+  border-color: #4c4c4c;
+  &:hover {
+    background: #191919;
+    border-color: #323232;
+  }
+}
+
+
+.btn--white {
+  background: white;
+  color: black;
+  border-color: white;
+}
+
+.btn--grey {
+  background: #eee;
+  border-color: #eee;
+  color: $black;
+  &:hover {
+    background: #bbb;
+    border-color: #bbb;
+  }
+}
+
+/* Button groups require the `_buttons.css` object as a dependency. */
+.btn-group {
+  > .btn {
+    float: left;
+    border-radius: 0;
+    border-right: none;
+    &:first-child {
+      border-radius: $btn-radius 0 0 $btn-radius;
+    }
+    &:last-child {
+      border-right: $btn-border-width $btn-border-style $btn-border-color;
+      border-radius: 0 $btn-radius $btn-radius 0;
+    }
+  }
+}

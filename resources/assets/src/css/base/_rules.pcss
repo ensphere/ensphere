@@ -1,0 +1,18 @@
+/* `hr` elements only take up a few pixels, so we need to give them special treatment regarding vertical rhythm. */
+
+hr {
+  margin-bottom: $base-space;
+  color: #e2e2e2;
+  border: none;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  &.dashed {
+    border-bottom-style: dashed;
+  }
+  &.dotted {
+    border-bottom-style: dotted;
+  }
+  &.thick {
+    border-bottom-width: 2px;
+  }
+}

@@ -1,0 +1,118 @@
+.table {
+  width: 100%;
+}
+
+.table thead th {
+  text-align: left;
+}
+
+.table tr th {
+  text-align: left;
+}
+
+.table p {
+  margin-bottom: 0;
+}
+
+
+/* Inverse colors on table. */
+.table--inverse {
+  background: black;
+  color: white;
+}
+
+/* Force tables into having equal-width columns. */
+.table--fixed {
+  table-layout: fixed;
+}
+
+/* Tables with very tightly packed cells. */
+.table--compact {
+  th,
+  td {
+    padding: $table-padding--compact;
+  }
+}
+
+/* Lightly packed cells. */
+.table--cosy {
+  th,
+  td {
+    padding: $table-padding--cosy;
+  }
+}
+
+/* Tables with very widely padded cells. */
+.table--comfy {
+  th,
+  td {
+    padding: $table-padding--comfy;
+  }
+}
+
+/* Add borders around a `table`. */
+.table--cells {
+  th,
+  td {
+    border: $table-border-width $table-border-style $table-border-color;
+  }
+}
+
+/* Add borders only to `table`’s rows. */
+.table--rows {
+  &,
+  th,
+  td {
+    border: 0 $table-border-style $table-border-color;
+  }
+}
+
+.table--rows {
+  border-top-width: $table-border-width;
+  th,
+  td {
+    border-bottom-width: $table-border-width;
+  }
+}
+
+/* Add borders only to `table`’s columns. */
+.table--columns {
+  &,
+  th,
+  td {
+    border: 0 $table-border-style $table-border-color;
+  }
+}
+
+.table--columns {
+  border-left-width: $table-border-width;
+  th,
+  td {
+    border-right-width: $table-border-width;
+  }
+}
+
+
+
+table {
+  width: 100%;
+  margin-bottom: $base-space;
+}
+
+table thead th {
+  text-align: left;
+}
+
+table tr th {
+  text-align: left;
+}
+
+table p {
+  margin-bottom: 0;
+}
+
+table th,
+table td {
+  padding: $table-padding--compact;
+  border: $table-border-width $table-border-style $table-border-color;
+}

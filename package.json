@@ -1,7 +1,44 @@
 {
-  "private": true,
-  "dependencies": {
-    "gulp": "^3.8.8",
-    "laravel-elixir": "*"
+  "name": "ensphere",
+  "version": "0.0.1",
+  "description": "Front-end components for the Ensphere framework",
+  "main": "gulpfile.js",
+  "license": "UNLICENSED",
+  "repository": {
+    "type": "git",
+    "url": "https://bitbucket.org/dcfcwebsite/ensphere-front-end"
+  },
+  "devDependencies": {
+    "autoprefixer": "^6.3.6",
+    "browser-sync": "^2.12.5",
+    "css-mqpacker": "^5.0.1",
+    "del": "^2.2.0",
+    "gulp": "^3.9.1",
+    "gulp-clean": "^0.3.2",
+    "gulp-concat": "^2.6.0",
+    "gulp-cssnano": "^2.1.2",
+    "gulp-file-include": "^1.0.0",
+    "gulp-imagemin": "^3.0.0",
+    "gulp-modernizr": "1.0.0-alpha",
+    "gulp-newer": "^1.1.0",
+    "gulp-plumber": "^1.1.0",
+    "gulp-postcss": "^6.1.1",
+    "gulp-rename": "^1.2.2",
+    "gulp-sourcemaps": "^2.4.0",
+    "gulp-uglify": "^2.0.1",
+    "gulp-util": "^3.0.7",
+    "imagemin-pngquant": "^5.0.0",
+    "lost": "^8.0.0",
+    "postcss-calc": "^5.2.1",
+    "postcss-color-function": "^3.0.0",
+    "postcss-conditionals": "^2.0.2",
+    "postcss-custom-media": "^5.0.1",
+    "postcss-discard-comments": "^2.0.4",
+    "postcss-import": "^9.1.0",
+    "postcss-mixins": "^5.0.0",
+    "postcss-nested": "^1.0.0",
+    "postcss-simple-extend": "^1.0.0",
+    "postcss-simple-vars": "^3.0.0",
+    "run-sequence": "^1.2.2"
   }
 }

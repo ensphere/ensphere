@@ -1,0 +1,121 @@
+/* Generic. */
+form {
+  margin-bottom: $base-space;
+}
+
+/* Fieldsets and legends. */
+fieldset {
+  background: none;
+  padding: $base-space;
+  border: 1px solid $form-border-color;
+  margin-bottom: $base-space;
+  /* Every fieldset must contain a legend.
+  IE barfs if it's not there. It's no fun. */
+  legend {
+    padding: 0 $base-space--half;
+    font-weight: bold;
+  }
+}
+
+/* Labels. */
+label {
+  width: 100%;
+  margin-bottom: 3px;
+  display: inline-block;
+  &.required:after {
+    content: "*";
+  }
+  abbr {
+    display: none;
+  }
+}
+
+/* Inputs. */
+input[type="text"],
+input[type="email"],
+input[type="search"],
+input[type="number"],
+input[type="password"],
+input[type="tel"],
+input[type="date"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="month"],
+input[type="week"],
+input[type="time"],
+input[type="url"],
+textarea {
+  width: 100%;
+  display: block;
+  box-sizing: border-box;
+  margin-bottom: $base-space;
+  outline: none;
+  border-radius: 2px;
+  background: none;
+  border: 1px solid $form-border-color;
+  padding: $base-space--half;
+  line-height: $base-line-height;
+  transition: border .2s ease-in-out, background .2s ease-in-out;
+
+  &:hover {
+    border: 1px solid $form-border-hover-color;
+  }
+
+  &:focus {
+    border: 1px solid $form-border-focus-color;
+  }
+
+}
+
+textarea {
+  resize: vertical;
+}
+
+input[type="range"],
+textarea {
+  width: 100%;
+  display: block;
+  box-sizing: border-box;
+  margin-bottom: $base-space--half;
+}
+
+/* Select dropdowns. */
+select {
+  max-width: 100%;
+  width: auto;
+  vertical-align: top;
+  box-sizing: border-box;
+}
+
+/* Radios and checkboxes. */
+input[type="radio"],
+input[type="checkbox"] {
+  box-sizing: border-box;
+  vertical-align: middle;
+}
+input[type="checkbox"] {
+  margin-right: $base-space--half;
+}
+
+/* File inputs. */
+input[type="file"] {
+  box-sizing: border-box;
+  margin-bottom: $base-space--half;
+  outline: none;
+  padding: $base-space--quarter 0;
+  line-height: 1;
+}
+
+/* Submits. */
+input[type="submit"] {
+  margin-top: -3px;
+  padding: $base-space--half $base-space;
+  background: $form-submit-btn-background;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  cursor: pointer;
+  &:hover, &:focus {
+    background: none;
+    border: 1px solid $grey9;
+  }
+}

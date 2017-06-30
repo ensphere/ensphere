@@ -1,0 +1,36 @@
+/**
+ * <nav class="pagination" role="navigation">
+ *   <ul class="list-inline">
+ *     <li><a href="#">&#171;</a></li>
+ *     <li><a href="#">&#8249;</a></li>
+ *     <li><a href="#">1</a></li>
+ *     <li><a href="#">2</a></li>
+ *     <li class="active"><a href="#">3</a></li>
+ *     <li><a href="#">4</a></li>
+ *     <li><a href="#">5</a></li>
+ *     <li><a href="#">6</a></li>
+ *     <li><a href="#">&#8250;</a></li>
+ *     <li><a href="#">&#187;</a></li>
+ *   </ul>
+ * </nav>
+ */
+
+.pagination {
+  text-align: center;
+
+  li {
+
+    a {
+      color: black;
+      padding: $base-space--quarter $base-space--half;
+      background: #f5f5f5;
+      border-radius: 2px;
+    }
+
+    &.active a, &:hover a {
+      background: #e2e2e2;
+    }
+
+  }
+
+}

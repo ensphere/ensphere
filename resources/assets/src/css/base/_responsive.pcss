@@ -1,0 +1,46 @@
+/* Hold breakpoint aliases and conditions */
+
+/* 480px and up */
+@custom-media --phablet               (min-width: $breakpoint_phablet);
+/* 768px and up */
+@custom-media --tablet                (min-width: $breakpoint_tablet);
+/* 992px and up */
+@custom-media --desktop               (min-width: $breakpoint_desktop);
+/* 1200px and up */
+@custom-media --wide                  (min-width: $breakpoint_wide);
+/* 1500px and up */
+@custom-media --huge                  (min-width: $breakpoint_huge);
+/** 1900px > */
+@custom-media  --mudda-fucker         (min-width: $breakpoint_mudda_fucker);
+/** 2100px > */
+@custom-media  --mudda-fucker-plus    (min-width: $breakpoint_mudda_fucker_plus);
+
+@custom-media --unbelievable          (min-width: $breakpoint_unbelievable);
+
+/* to invoke:
+  @media(--bp480) { font-size: 30px; }
+*/
+
+/* Container settings
+	 Define max-width settings on each breakpoint and padding for your containers. */
+.container {
+  &:before,
+  &:after {
+    content: " ";
+    display: table;
+  }
+  &:after {
+    clear: both;
+  }
+  margin: 0 auto;
+  /* side padding */
+  padding: 0 $default-container-padding;
+  /* max-width 100% by default (mobile first) */
+  max-width: 100%;
+  @media(--phablet)               { lost-center: $breakpoint_phablet_max_width $default-container-padding;          }
+  @media(--tablet)                { lost-center: $breakpoint_tablet_max_width $default-container-padding;           }
+  @media(--desktop)               { lost-center: $breakpoint_desktop_max_width $default-container-padding;          }
+  @media(--wide)                  { lost-center: $breakpoint_wide_max_width $default-container-padding;             }
+  @media(--huge)                  { lost-center: $breakpoint_huge_max_width $default-container-padding;             }
+
+}

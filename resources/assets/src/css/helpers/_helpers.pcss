@@ -1,0 +1,54 @@
+/* Clearfix */
+.clearfix, .cf {
+  &:before,
+  &:after {
+    content: "";
+    display: table;
+  }
+  &:after {
+    clear: both;
+  }
+}
+
+/* Hide visually AND from screen readers */
+.hidden {
+  display: none !important;
+}
+
+/* Hide visually BUT NOT from screen readers */
+.visuallyhidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+/* Extends the .visuallyhidden class to allow the element to be focusable when navigated to via the keyboard */
+.visuallyhidden.focusable:active,
+.visuallyhidden.focusable:focus {
+  clip: auto;
+  height: auto;
+  margin: 0;
+  overflow: visible;
+  position: static;
+  width: auto;
+}
+
+/* Hide visually AND from screen readers but maintain layout */
+.invisible {
+  visibility: hidden;
+}
+
+/* Generic separator */
+.sep {
+  margin: 0 $base-space--half;
+}
+
+/* Mute an element */
+.muted {
+  opacity: 0.4;
+}
