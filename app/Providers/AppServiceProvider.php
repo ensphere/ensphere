@@ -48,6 +48,7 @@ class AppServiceProvider extends ServiceProvider
 			$contracts = Service::contracts([
 
 				/** THESE ARE APPLICATION CONTRACTS. */
+                "Ensphere\\Ensphere\\Contracts\\Blueprints\\ApiBlueprint" => "Ensphere\\Ensphere\\Contracts\\Api"
 
 			]);
 			foreach( $contracts as $blueprint => $contract ) {

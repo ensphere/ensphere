@@ -17,10 +17,11 @@ class Routes implements  RoutesBlueprint
      */
     public function routes( Router $router )
     {
-        $router->get('/', function(){
-            return view( 'ensphere' );
+        $router->group( [ 'prefix' => 'api', 'middleware' => [ 'web' ] ], function( $router ) {
+
+            $router->get( 'render', [ 'uses' => 'ApiController@render' ] );
+
         });
-        $this->menuItems();
     }
 
     protected function menuItems()
