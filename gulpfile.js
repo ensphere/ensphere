@@ -143,7 +143,9 @@ gulp.task('styles:main', ['styles:dev'], function() {
     // Return the styles.dev.css file in dist
     return gulp.src(distPath.styles + 'ensphere.css')
     // Minify the file
-        .pipe(cssNano())
+        .pipe(cssNano({
+            zindex: false
+        }))
         // Duplicate file and add .min onto filename
         .pipe(rename({suffix: '.min'}))
         // Write out file back to dist
