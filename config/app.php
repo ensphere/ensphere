@@ -155,7 +155,8 @@ return [
 		Illuminate\Validation\ValidationServiceProvider::class,
 		Illuminate\View\ViewServiceProvider::class,
 		Collective\Html\HtmlServiceProvider::class,
-		EnsphereCore\AppServiceProvider::class
+		EnsphereCore\AppServiceProvider::class,
+        Laraview\Providers\AppServiceProvider::class,
 
 	], [
 
